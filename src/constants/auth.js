@@ -1,0 +1,12 @@
+export const LOGIN_REQUEST = `LOGIN_REQUEST`;
+export const LOGIN_SUCCESS = `LOGIN_SUCCESS`;
+export const LOGIN_FAILURE = `LOGIN_FAILURE`;
+
+export const REFRESH_REQUEST = `REFRESH_REQUEST`;
+export const REFRESH_SUCCESS = `REFRESH_SUCCESS`;
+export const REFRESH_FAILURE = `REFRESH_FAILURE`;
+export const REFRESH_PROMISE = `REFRESH_PROMISE`;
+
+export const AUTH_ERROR = `AUTH_ERROR`;
+
+export const LOGOUT = `LOGOUT`;
