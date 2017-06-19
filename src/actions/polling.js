@@ -17,12 +17,8 @@ export function updateTab(tab){
 
 export function pollData(tab){
   return (dispatch, getState) => {
-    console.log(tab);
-    console.log(getState().polling.get(`tab`));
-    console.log(poll);
     if (tab === getState().polling.get(`tab`) && poll[tab] === 0){
       poll[tab] += 1;
-      console.log(poll);
       switch(tab){
       case `command`:
         return dispatch(getDeviceCommandPoll(getState().devices.get(`device`)))
