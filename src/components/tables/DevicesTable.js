@@ -25,6 +25,7 @@ export default class DevicesTable extends Component {
         fixedFooter={false}
         fixedHeader={false}
         selectable={false}
+        height={`400px`}
       >
         <TableHeader
           adjustForCheckbox={false}

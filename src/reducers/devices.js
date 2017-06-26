@@ -2,8 +2,7 @@ import constants from '../constants';
 import { List, Map } from 'immutable';
 
 const initialState = Map({
-  devicesList : List([]),
-  device : ``
+  devicesList : List([])
 });
 
 export default function devices(state = initialState, action){
@@ -22,12 +21,6 @@ export default function devices(state = initialState, action){
     return state;
   case constants.devices.REMOVE_DEVICE_FAILURE:
     return state;
-  case constants.devices.SET_DEVICE:
-    return state
-      .set(`device`, action.payload);
-  case constants.devices.REMOVE_DEVICE:
-    return state
-      .set(`device`, ``);
   default:
     return state;
   }

@@ -55,7 +55,7 @@ export default store => next => action => {
     return next(action);
   }
   let { endpoint } = callAPI;
-  const { types, query, method, headers, body, encoding } = callAPI;
+  const { types, query, method, headers, body, encoding, actionParams } = callAPI;
 
   if (typeof endpoint === `function`){
     endpoint = endpoint(store.getState());
@@ -85,7 +85,8 @@ export default store => next => action => {
   return callApi({ endpoint, query, method, headers, body, encoding })
     .then(response => next(actionWith({
       payload : response,
-      type : successType
+      type : successType,
+      actionParams
     })),
     error => next(actionWith({
       type : failureType,

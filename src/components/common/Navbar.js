@@ -44,13 +44,14 @@ export default class Navbar extends Component {
         <AppBar
           id="app-bar"
           title={menuItems[this.state.checkedIndex].text}
+          showMenuIconButton={this.props.showDrawer}
           onLeftIconButtonTouchTap={this.props.showDrawer ? this.handleToggle.bind(this) : () => {}}
           iconElementRight={this.props.authenticated ? <FlatButton label="Logout" onTouchTap={this.logout.bind(this)}/> : <div></div>}
         />
         <Drawer open={this.state.open}
                 docked={false}
                 onRequestChange={(open) => this.setState({ open })}>
-          {menuItems.map((item, i) => <Link to={item.link} key={i} onTouchTap={this.handleClose.bind(this)}><MenuItem style={ this.state.checkedIndex === i ? { backgroundColor : `grey` } : {}}>{item.text}</MenuItem></Link>)}
+          {menuItems.map((item, i) => item.link !== `/` && <Link to={item.link} key={i} onTouchTap={this.handleClose.bind(this)}><MenuItem style={ this.state.checkedIndex === i ? { backgroundColor : `grey` } : {}}>{item.text}</MenuItem></Link>)}
         </Drawer>
       </div>
     );

@@ -38,18 +38,3 @@ export function saveDevice(body){
     });
   
 }
-
-export function setDeviceId(id){
-  return dispatch =>
-    dispatch({
-      type : constants.devices.SET_DEVICE,
-      payload : id
-    });
-}
-
-export function removeDeviceId(){
-  return dispatch => 
-    dispatch({
-      type : constants.devices.REMOVE_DEVICE
-    })
-}

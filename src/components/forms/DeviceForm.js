@@ -58,6 +58,16 @@ export default class DeviceForm extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      id : nextProps.device.id,
+      name : nextProps.device.name,
+      networkId : nextProps.device.networkId,
+      isBlocked : nextProps.device.isBlocked,
+      data : nextProps.device.data
+    })
+  }
+
   render(){
     return (
       <Card>
@@ -130,7 +140,7 @@ export default class DeviceForm extends Component {
               autoComplete="off"
               disabled={this.props.info}
               multiLine={true}
-              value={this.state.data}
+              value={JSON.stringify(this.state.data)}
               onChange={(event, value) => this.setState({ data : value })}
             />
           </Col>
