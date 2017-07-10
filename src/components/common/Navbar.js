@@ -5,10 +5,10 @@ import { AppBar, Drawer, MenuItem, FlatButton } from 'material-ui';
 
 const menuItems = [
   { text : `Login`, link : `/` },
-  { text : `Users`, link : `/users` },
-  { text : `Networks`, link : `/networks` },
-  { text : `Devices`, link : `/devices` },
-  { text : `JWT`, link : `/jwt` }
+  { text : `Users`, link : `/users`, access : [`admin`] },
+  { text : `Networks`, link : `/networks`, access : [`admin`, `user`] },
+  { text : `Devices`, link : `/devices`, access : [`admin`, `user`] },
+  { text : `JWT`, link : `/jwt`, access : [`admin`, `user` ] }
 ];
 
 export default class Navbar extends Component {
@@ -51,7 +51,7 @@ export default class Navbar extends Component {
         <Drawer open={this.state.open}
                 docked={false}
                 onRequestChange={(open) => this.setState({ open })}>
-          {menuItems.map((item, i) => item.link !== `/` && <Link to={item.link} key={i} onTouchTap={this.handleClose.bind(this)}><MenuItem style={ this.state.checkedIndex === i ? { backgroundColor : `grey` } : {}}>{item.text}</MenuItem></Link>)}
+          {menuItems.map((item, i) => item.link !== `/` && item.access.includes(this.props.userRole) && <Link to={item.link} key={i} onTouchTap={this.handleClose.bind(this)}><MenuItem style={ this.state.checkedIndex === i ? { backgroundColor : `grey` } : {}}>{item.text}</MenuItem></Link>)}
         </Drawer>
       </div>
     );

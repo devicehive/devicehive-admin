@@ -32,7 +32,7 @@ export class Login extends Component {
       <Redirect to={{ pathname : this.state.from ? this.state.from : `/devices` }}/>
       :
       <div>
-        <Navbar locationPath={this.props.location.pathname} showDrawer={false} authenticated={false}/>
+        <Navbar locationPath={this.props.location.pathname} showDrawer={false} authenticated={false} userRole={this.props.auth.get(`role`)}/>
         <Grid fluid>
           <Row>
             <Col md={4} xs={4}>

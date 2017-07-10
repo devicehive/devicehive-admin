@@ -5,11 +5,13 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import actions from '../../actions';
 import Navbar from '../common/Navbar';
 import DevicesTable from '../tables/DevicesTable';
-import { RaisedButton, Tabs, Tab, FlatButton, Dialog, DatePicker, Divider, TimePicker } from 'material-ui';
+import { RaisedButton, Tabs, Tab, FlatButton } from 'material-ui';
 import DeviceForm from '../forms/DeviceForm';
 import CommandsTable from '../tables/CommandsTable';
 import NotificationsTable from '../tables/NotificationsTable';
 import moment from 'moment';
+import TimeFilter from '../TimeFilter';
+import CommandNotificationCreator from '../CommandNotificationCreator';
 
 export class Devices extends Component {
   constructor(props){
@@ -19,6 +21,8 @@ export class Devices extends Component {
       device : null,
       info : false,
       openDateTimeDialog : false,
+      openCommandNotificationDialog : false,
+      command : null,
       from : {
         date : null,
         time : null
@@ -80,14 +84,14 @@ export class Devices extends Component {
     })
   }
 
-  setTimePeriod(){
+  setTimePeriod(fromDateTime, toDateTime){
     this.setState({
       openDateTimeDialog : false
     });
-    const from = `${moment(this.state.from.date).format(`YYYY-MM-DD`)}T${moment(this.state.from.time).format(`HH:mm:ss`)}`;
+    const from = `${moment(fromDateTime.date).format(`YYYY-MM-DD`)}T${moment(fromDateTime.time).format(`HH:mm:ss`)}`;
     let to = ``;
-    if (this.state.to.date && this.state.to.time){
-      to = `${moment(this.state.to.date).format(`YYYY-MM-DD`)}T${moment(this.state.to.time).format(`HH:mm:ss`)}`;
+    if (toDateTime.date && toDateTime.time){
+      to = `${moment(toDateTime.date).format(`YYYY-MM-DD`)}T${moment(toDateTime.time).format(`HH:mm:ss`)}`;
     }
     this.props.actions.polling.setTimePeriod(from, to);
   }
@@ -120,25 +124,41 @@ export class Devices extends Component {
     this.props.actions.devices.saveDevice(body)
       .then(() => this.props.actions.devices.getDevices())
   }
+
+  openCommandNotificationDialog(){
+    this.setState({
+      openCommandNotificationDialog : true
+    })
+  }
+
+  closeCommandNotificationDialog(){
+    this.setState({
+      openCommandNotificationDialog : false,
+      command : null
+    })
+  }
+
+  send({ name, parameters }){
+    this.props.polling.get(`tab`) === `command` ?
+    this.props.actions.devices.sendCommand(this.props.polling.get(`device`), { command : name, parameters : JSON.parse(parameters) }) :
+    this.props.actions.devices.sendNotification(this.props.polling.get(`device`), { notification : name, parameters : JSON.parse(parameters) });
+  }
+
+  refreshCommand(commandId){
+    this.props.actions.devices.refreshCommand(this.props.polling.get(`device`), commandId);
+  }
+
+  copyCommand(command){
+    this.setState({
+      command
+    });
+    this.openCommandNotificationDialog();
+  }
   
   render(){
-    const dateTimeActions = [
-      <FlatButton
-        label="Cancel"
-        primary={true}
-        onTouchTap={this.closeDateTimeDialog.bind(this)}
-      />,
-      <FlatButton
-        label="Submit"
-        primary={true}
-        keyboardFocused={true}
-        onTouchTap={this.setTimePeriod.bind(this)}
-      />
-    ];
-
     return (
       <div>
-        <Navbar locationPath={this.props.location.pathname} showDrawer={true} authenticated={true} logout={this.props.actions.logout}/>
+        <Navbar locationPath={this.props.location.pathname} showDrawer={true} authenticated={true} logout={this.props.actions.logout} userRole={this.props.auth.get(`role`)}/>
         <Grid fluid>
           <Row
             style={{
@@ -188,15 +208,26 @@ export class Devices extends Component {
                       color : `black`
                     }}
                   >
-                    <Col md={6} xs={6}>
-                      <FlatButton
-                        label="Filter time period"
-                        onTouchTap={this.openDateTimeDialog.bind(this)}
-                        fullWidth={true}
-                      />
-                    </Col>
+                    <Row>
+                      <Col md={6} xs={6}>
+                        <FlatButton
+                          label="Filter time period"
+                          onTouchTap={this.openDateTimeDialog.bind(this)}
+                          fullWidth={true}
+                        />
+                      </Col>
+                      <Col md={6} xs={6}>
+                        <FlatButton
+                          label="Enter new command"
+                          onTouchTap={this.openCommandNotificationDialog.bind(this)}
+                          fullWidth={true}
+                        />
+                      </Col>
+                    </Row>
                     <CommandsTable 
-                      commandsPoll={this.props.polling.get(`commandsPoll`)} 
+                      commandsPoll={this.props.polling.get(`commandsPoll`)}
+                      refreshCommand={this.refreshCommand.bind(this)}
+                      copyCommand={this.copyCommand.bind(this)}
                     />
                   </Tab>
                   <Tab
@@ -206,13 +237,22 @@ export class Devices extends Component {
                       color : `black`
                     }}
                   >
-                    <Col md={6} xs={6}>
-                      <FlatButton
-                        label="Filter time period"
-                        onTouchTap={this.openDateTimeDialog.bind(this)}
-                        fullWidth={true}
-                      />
-                    </Col>
+                    <Row>
+                      <Col md={6} xs={6}>
+                        <FlatButton
+                          label="Filter time period"
+                          onTouchTap={this.openDateTimeDialog.bind(this)}
+                          fullWidth={true}
+                        />
+                      </Col>
+                      <Col md={6} xs={6}>
+                        <FlatButton
+                          label="Enter new notification"
+                          onTouchTap={this.openCommandNotificationDialog.bind(this)}
+                          fullWidth={true}
+                        />
+                      </Col>
+                    </Row>
                     <NotificationsTable 
                       notificationsPoll={this.props.polling.get(`notificationsPoll`)} 
                     />
@@ -222,66 +262,19 @@ export class Devices extends Component {
             }
           </Row>
         </Grid>
-        <Dialog
-          title="Time Filter"
-          open={this.state.openDateTimeDialog}
-          actions={dateTimeActions}
-          onRequestClose={this.closeDateTimeDialog.bind(this)}
-        >
-          <Divider/>
-          <Grid fluid>
-            <h4>From:</h4>
-            <Row>
-              <Col xs={4} md={4}>
-                <DatePicker 
-                  hintText="Date"
-                  mode="portrait"
-                  value={this.state.from.date}
-                  onChange={this.changeDate.bind(this, `from`)}
-                />
-              </Col>
-              <Col xs={4} md={4} xsOffset={1} mdOffset={1}>
-                <TimePicker
-                  format="24hr"
-                  hintText="Time"
-                  value={this.state.from.time}
-                  onChange={this.changeTime.bind(this, `from`)}
-                />
-              </Col>
-              <Col xs={2} md={2} xsOffset={1} mdOffset={1}>
-                <FlatButton
-                  label="Clear"
-                  onTouchTap={this.clearDateTime.bind(this, `from`)}
-                />
-              </Col>
-            </Row>
-            <h4>To:</h4>
-            <Row>
-              <Col xs={4} md={4}>
-                <DatePicker 
-                  hintText="Date"
-                  mode="portrait"
-                  value={this.state.to.date}
-                  onChange={this.changeDate.bind(this, `to`)}
-                />
-              </Col>
-              <Col xs={4} md={4} xsOffset={1} mdOffset={1}>
-                <TimePicker
-                  format="24hr"
-                  hintText="Time"
-                  value={this.state.to.time}
-                  onChange={this.changeTime.bind(this, `to`)}
-                />
-              </Col>
-              <Col xs={2} md={2} xsOffset={1} mdOffset={1}>
-                <FlatButton
-                  label="Clear"
-                  onTouchTap={this.clearDateTime.bind(this, `to`)}
-                />
-              </Col>
-            </Row>
-          </Grid>
-        </Dialog>
+        <TimeFilter
+          closeDialog={this.closeDateTimeDialog.bind(this)}
+          saveTime={this.setTimePeriod.bind(this)}
+          openDialog={this.state.openDateTimeDialog}
+        />
+        {this.state.openCommandNotificationDialog &&
+        <CommandNotificationCreator
+          type={this.props.polling.get(`tab`)}
+          openDialog={this.state.openCommandNotificationDialog}
+          closeDialog={this.closeCommandNotificationDialog.bind(this)}
+          send={this.send.bind(this)}
+          command={this.state.command}
+        />}
       </div>
     );
   }
@@ -291,7 +284,8 @@ export function mapStateToProps(state){
   return {
     devices : state.devices,
     networks : state.networks,
-    polling : state.polling
+    polling : state.polling,
+    auth : state.auth
   };
 }
 

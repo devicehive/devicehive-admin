@@ -23,7 +23,7 @@ export default class DevicesTable extends Component {
     return (
       <Table
         fixedFooter={false}
-        fixedHeader={false}
+        fixedHeader={true}
         selectable={false}
         height={`400px`}
       >
@@ -37,7 +37,7 @@ export default class DevicesTable extends Component {
             <TableHeaderColumn>Network</TableHeaderColumn>
             <TableHeaderColumn>Operation</TableHeaderColumn>
             <TableHeaderColumn>Data(json)</TableHeaderColumn>
-            <TableHeaderColumn></TableHeaderColumn>
+            <TableHeaderColumn>Actions</TableHeaderColumn>
           </TableRow>
         </TableHeader>
         <TableBody

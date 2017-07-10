@@ -8,7 +8,7 @@ export class JWT extends Component {
   render(){
     return (
       <div>
-        <Navbar locationPath={this.props.location.pathname} showDrawer={true} authenticated={true} logout={this.props.actions.logout}/>
+        <Navbar locationPath={this.props.location.pathname} showDrawer={true} authenticated={true} logout={this.props.actions.logout} userRole={this.props.auth.get(`role`)}/>
         <h4>JWT</h4>
       </div>
     );
@@ -16,7 +16,9 @@ export class JWT extends Component {
 }
 
 export function mapStateToProps(state){
-  return {};
+  return {
+    auth : state.auth
+  };
 }
 
 export function mapDispatchToProps(dispatch){

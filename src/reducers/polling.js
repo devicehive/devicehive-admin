@@ -109,6 +109,18 @@ export default function polling(state = initialState, action){
       .set(`notificationsPoll`, List(action.payload));
   case constants.polling.GET_DEVICE_NOTIFICATION_POLL_PERIOD_FAILURE:
     return state;
+  case constants.devices.REFRESH_DEVICE_COMMAND_SUCCESS:
+    const commandsPollCopy = state.get(`commandsPoll`);
+    return state
+      .set(`commandsPoll`,
+      commandsPollCopy
+        .set(
+          commandsPollCopy.findIndex(function(item) {
+            console.log(item);
+            return item.id === action.payload.id;
+          }),
+          action.payload
+        ));
   default:
     return state;
   }
