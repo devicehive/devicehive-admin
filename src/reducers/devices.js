@@ -21,6 +21,9 @@ export default function devices(state = initialState, action){
     return state;
   case constants.devices.REMOVE_DEVICE_FAILURE:
     return state;
+  case constants.auth.LOGOUT:
+    return state
+      .set(`devicesList`, List([]))
   default:
     return state;
   }

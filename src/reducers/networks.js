@@ -16,6 +16,10 @@ export default function networks(state = initialState, action){
       .set(`networksList`, List(action.payload));
   case constants.networks.GET_NETWORKS_FAILURE:
     return state;
+  case constants.auth.LOGOUT:
+    return state
+      .set(`networksList`, List([]))
+      .set(`network`, Map({}));
   default:
     return state;
   }

@@ -67,7 +67,7 @@ export default class TimeFilter extends Component {
         <Grid fluid>
           <h4>From:</h4>
           <Row>
-            <Col xs={4} md={4}>
+            <Col lg={4} md={4}>
               <DatePicker
                 hintText="Date"
                 mode="portrait"
@@ -75,7 +75,7 @@ export default class TimeFilter extends Component {
                 onChange={this.changeDate.bind(this, `from`)}
               />
             </Col>
-            <Col xs={4} md={4} xsOffset={1} mdOffset={1}>
+            <Col lg={4} md={4} lgOffset={1} mdOffset={1}>
               <TimePicker
                 format="24hr"
                 hintText="Time"
@@ -83,7 +83,7 @@ export default class TimeFilter extends Component {
                 onChange={this.changeTime.bind(this, `from`)}
               />
             </Col>
-            <Col xs={2} md={2} xsOffset={1} mdOffset={1}>
+            <Col lg={2} md={2} lgOffset={1} mdOffset={1}>
               <FlatButton
                 label="Clear"
                 onTouchTap={this.clearDateTime.bind(this, `from`)}
@@ -92,7 +92,7 @@ export default class TimeFilter extends Component {
           </Row>
           <h4>To:</h4>
           <Row>
-            <Col xs={4} md={4}>
+            <Col lg={4} md={4}>
               <DatePicker
                 hintText="Date"
                 mode="portrait"
@@ -100,7 +100,7 @@ export default class TimeFilter extends Component {
                 onChange={this.changeDate.bind(this, `to`)}
               />
             </Col>
-            <Col xs={4} md={4} xsOffset={1} mdOffset={1}>
+            <Col lg={4} md={4} lgOffset={1} mdOffset={1}>
               <TimePicker
                 format="24hr"
                 hintText="Time"
@@ -108,7 +108,7 @@ export default class TimeFilter extends Component {
                 onChange={this.changeTime.bind(this, `to`)}
               />
             </Col>
-            <Col xs={2} md={2} xsOffset={1} mdOffset={1}>
+            <Col lg={2} md={2} lgOffset={1} mdOffset={1}>
               <FlatButton
                 label="Clear"
                 onTouchTap={this.clearDateTime.bind(this, `to`)}

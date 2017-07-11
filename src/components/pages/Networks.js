@@ -53,7 +53,7 @@ export class Networks extends Component {
         <Navbar locationPath={this.props.location.pathname} showDrawer={true} authenticated={true} logout={this.props.actions.logout} userRole={this.props.auth.get(`role`)}/>
         <Grid fluid>
           <Row>
-            <Col md={8} xs={8} mdOffset={2} xsOffset={2}>
+            <Col md={8} lg={8} mdOffset={2} lgOffset={2}>
               <NetworksTable
                 networks={this.props.networks.get(`networksList`)}
                 userRole={this.props.auth.get(`role`)}
@@ -65,13 +65,13 @@ export class Networks extends Component {
           </Row>
           {this.props.auth.get(`role`) === `admin` && 
             <Row>
-              <Col md={8} xs={8} mdOffset={2} xsOffset={2}>
+              <Col md={8} lg={8} mdOffset={2} lgOffset={2}>
                 {this.state.showNetworkForm ?
-                  <Col md={12} xs={12}>
+                  <Col md={12} lg={12}>
                     <NetworkForm network={this.state.network} toggle={this.toggleForm.bind(this)} submit={this.submit.bind(this)} removeNetwork={this.props.actions.networks.removeNetwork} edit={this.edit.bind(this)}/>
                   </Col>
                 :
-                  <Col md={3} xs={3}>
+                  <Col md={3} lg={3}>
                     <RaisedButton 
                       label="Add Network" 
                       primary={true} 

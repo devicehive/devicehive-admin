@@ -121,6 +121,14 @@ export default function polling(state = initialState, action){
           }),
           action.payload
         ));
+  case constants.auth.LOGOUT:
+    return state
+      .set(`tab`, `command`)
+      .set(`device`, ``)
+      .set(`from`, ``)
+      .set(`to`, ``)
+      .set(`commandsPoll`, List([]))
+      .set(`notificationsPoll`, List([]));
   default:
     return state;
   }

@@ -60,7 +60,12 @@ export default function auth(state = initialState, action){
       .set(`isAuthenticated`, false);
   case constants.auth.LOGOUT:
     return state
-      .set(`isAuthenticated`, false);
+      .set(`isAuthenticated`, false)
+      .set(`isRefreshing`, false)
+      .set(`refreshPromise`, null)
+      .set(`role`, null)
+      .setIn([`tokens`, `jwtToken`], ``)
+      .setIn([`tokens`, `refreshToken`], ``);
   default:
     return state;
   }

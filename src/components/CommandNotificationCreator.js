@@ -68,7 +68,7 @@ export default class CommandNotificationCreator extends Component {
       >
         <Divider/>
         <Grid fluid>
-          <Col xs={6} md={6}>
+          <Col lg={6} md={6}>
             <TextField
               floatingLabelText="Name"
               fullWidth={true}
@@ -76,7 +76,7 @@ export default class CommandNotificationCreator extends Component {
               onChange={this.nameChange.bind(this)}
             />
           </Col>
-          <Col xs={6} md={6}>
+          <Col lg={6} md={6}>
             <TextField
               floatingLabelText="Parameters"
               fullWidth={true}

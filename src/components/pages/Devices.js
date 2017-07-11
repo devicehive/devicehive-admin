@@ -165,18 +165,18 @@ export class Devices extends Component {
               marginBottom : `10px`
             }}
           >
-            <Col md={8} xs={8} mdOffset={2} xsOffset={2}>
+            <Col md={8} lg={8} mdOffset={2} lgOffset={2}>
               <DevicesTable devices={this.props.devices.get(`devicesList`)} networks={this.props.networks.get(`networksList`)} removeDevice={this.props.actions.devices.removeDevice} edit={this.edit.bind(this)} info={this.info.bind(this)}/>
             </Col>
           </Row>
           <Row>
-            <Col md={8} xs={8} mdOffset={2} xsOffset={2}>
+            <Col md={8} lg={8} mdOffset={2} lgOffset={2}>
               {this.state.showDeviceForm ?
-                <Col md={12} xs={12}>
+                <Col md={12} lg={12}>
                   <DeviceForm device={this.state.device} toggle={this.toggleForm.bind(this)} networks={this.props.networks.get(`networksList`)} submit={this.submit.bind(this)} info={this.state.info}/>
                 </Col>
               :
-                <Col md={3} xs={3}>
+                <Col md={3} lg={3}>
                   <RaisedButton 
                     label="Add Device" 
                     primary={true} 
@@ -193,7 +193,7 @@ export class Devices extends Component {
             }}
           >
             { this.state.info &&
-              <Col md={8} xs={8} mdOffset={2} xsOffset={2}>
+              <Col md={8} lg={8} mdOffset={2} lgOffset={2}>
                 <Tabs
                   value={this.props.polling.get(`tab`)}
                   onChange={this.tabChange.bind(this)}
@@ -209,14 +209,14 @@ export class Devices extends Component {
                     }}
                   >
                     <Row>
-                      <Col md={6} xs={6}>
+                      <Col md={6} lg={6}>
                         <FlatButton
                           label="Filter time period"
                           onTouchTap={this.openDateTimeDialog.bind(this)}
                           fullWidth={true}
                         />
                       </Col>
-                      <Col md={6} xs={6}>
+                      <Col md={6} lg={6}>
                         <FlatButton
                           label="Enter new command"
                           onTouchTap={this.openCommandNotificationDialog.bind(this)}
@@ -238,14 +238,14 @@ export class Devices extends Component {
                     }}
                   >
                     <Row>
-                      <Col md={6} xs={6}>
+                      <Col md={6} lg={6}>
                         <FlatButton
                           label="Filter time period"
                           onTouchTap={this.openDateTimeDialog.bind(this)}
                           fullWidth={true}
                         />
                       </Col>
-                      <Col md={6} xs={6}>
+                      <Col md={6} lg={6}>
                         <FlatButton
                           label="Enter new notification"
                           onTouchTap={this.openCommandNotificationDialog.bind(this)}

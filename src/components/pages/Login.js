@@ -35,7 +35,7 @@ export class Login extends Component {
         <Navbar locationPath={this.props.location.pathname} showDrawer={false} authenticated={false} userRole={this.props.auth.get(`role`)}/>
         <Grid fluid>
           <Row>
-            <Col md={4} xs={4}>
+            <Col md={4} lg={4}>
               <TextField
                 id="login"
                 type="text"
@@ -47,7 +47,7 @@ export class Login extends Component {
             </Col>
           </Row>
           <Row>
-            <Col md={4} xs={4}>
+            <Col md={4} lg={4}>
               <TextField
                 id="password"
                 type="password"
@@ -59,7 +59,7 @@ export class Login extends Component {
             </Col>
           </Row>
           <Row>
-            <Col md={2} xs={2} mdOffset={2} xsOffset={2}>
+            <Col md={2} lg={2} mdOffset={2} lgOffset={2}>
                <RaisedButton 
                 label="Login" 
                 primary={true} 

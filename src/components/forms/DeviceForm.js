@@ -83,7 +83,7 @@ export default class DeviceForm extends Component {
         />
         <Divider/>
         <CardText>
-          <Col md={6} xs={6} mdOffset={3} xsOffset={3}>
+          <Col md={6} lg={6} mdOffset={3} lgOffset={3}>
             <TextField
               id="deviceName"
               type="text"
@@ -95,7 +95,7 @@ export default class DeviceForm extends Component {
               onChange={(event, value) => this.setState({ name : value })}
             />
           </Col>
-          <Col md={6} xs={6} mdOffset={3} xsOffset={3}>
+          <Col md={6} lg={6} mdOffset={3} lgOffset={3}>
             <SelectField
               floatingLabelText="Network"
               fullWidth={true}
@@ -112,7 +112,7 @@ export default class DeviceForm extends Component {
               }
             </SelectField>
           </Col>
-          <Col md={6} xs={6} mdOffset={3} xsOffset={3}>
+          <Col md={6} lg={6} mdOffset={3} lgOffset={3}>
             <SelectField
               floatingLabelText="Operation"
               fullWidth={true}
@@ -131,7 +131,7 @@ export default class DeviceForm extends Component {
               </MenuItem>
             </SelectField>
           </Col>
-          <Col md={6} xs={6} mdOffset={3} xsOffset={3}>
+          <Col md={6} lg={6} mdOffset={3} lgOffset={3}>
             <TextField
               id="deviceData"
               type="text"
@@ -147,7 +147,7 @@ export default class DeviceForm extends Component {
         </CardText>
         {!this.props.info &&
           <CardActions>
-            <Col md={6} xs={6} mdOffset={3} xsOffset={3}>
+            <Col md={6} lg={6} mdOffset={3} lgOffset={3}>
               <FlatButton label="Save" onTouchTap={this.submit.bind(this)}/>
               <FlatButton label="Cancel" onTouchTap={this.props.toggle}/>
             </Col>
