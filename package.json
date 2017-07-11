@@ -7,6 +7,7 @@
     "isomorphic-fetch": "^2.2.1",
     "jwt-decode": "^2.2.0",
     "material-ui": "^0.18.3",
+    "material-ui-pagination": "^1.0.4",
     "moment": "^2.18.1",
     "randomstring": "^1.1.5",
     "react": "^15.5.4",

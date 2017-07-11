@@ -10,6 +10,7 @@ import './index.css';
 import Login from './components/pages/Login';
 import Users from './components/pages/Users';
 import Networks from './components/pages/Networks';
+import Network from './components/pages/Network';
 import Devices from './components/pages/Devices';
 import JWT from './components/pages/JWT';
 
@@ -37,7 +38,13 @@ render(
             <Networks/>
           </ProtectedRoute>
         }/>
-        <Route path="/devices" render={
+        <Route path="/network/:id" render={
+          props =>
+            <ProtectedRoute {...props}>
+              <Network/>
+            </ProtectedRoute>
+        }/>
+        <Route exact path="/devices" render={
           props => 
           <ProtectedRoute {...props}>
             <Devices/>

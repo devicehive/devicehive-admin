@@ -15,28 +15,9 @@ export default class DeviceForm extends Component {
   constructor(props){
     super(props);
     this.state = {
-      id : ``,
       name : ``,
       description : ``
     };
-  }
-
-  componentWillMount(){
-    if (this.props.network){
-      this.setState({
-        id : this.props.network.id,
-        name : this.props.network.name,
-        description : this.props.network.description
-      })
-    }
-  }
-
-  componentWillReceiveProps(nextProps){
-    this.setState({
-      id : nextProps.network.id,
-      name : nextProps.network.name,
-      description : nextProps.network.description
-    })
   }
 
   submit(){

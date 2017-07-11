@@ -7,13 +7,14 @@ import Navbar from '../common/Navbar';
 import NetworksTable from '../tables/NetworksTable';
 import { RaisedButton } from 'material-ui';
 import NetworkForm from '../forms/NetworkForm';
+import Pagination from 'material-ui-pagination';
 
 export class Networks extends Component {
   constructor(props){
     super(props);
     this.state = {
       showNetworkForm : false,
-      network : null
+      currentPage : 1
     };
   }
 
@@ -23,8 +24,7 @@ export class Networks extends Component {
 
   toggleForm(){
     this.setState({
-      showNetworkForm : !this.state.showNetworkForm,
-      network : null
+      showNetworkForm : !this.state.showNetworkForm
     })
   }
 
@@ -32,19 +32,7 @@ export class Networks extends Component {
     this.setState({
       showNetworkForm : false
     });
-    if (body.id === ``){
-      delete body.id;
-      this.props.actions.networks.createNetwork(body);
-    } else {
-      this.props.actions.networks.updateNetwork(body);
-    }
-  }
-
-  edit(id){
-    this.setState({
-      network : this.props.networks.get(`networksList`).find(network => network.id === id),
-      showNetworkForm : true
-    })
+    this.props.actions.networks.createNetwork(body);
   }
 
   render(){
@@ -55,10 +43,8 @@ export class Networks extends Component {
           <Row>
             <Col md={8} lg={8} mdOffset={2} lgOffset={2}>
               <NetworksTable
-                networks={this.props.networks.get(`networksList`)}
+                networks={this.props.networks.get(`networksList`).slice(0 + (this.state.currentPage - 1) * 10, this.state.currentPage * 10)}
                 userRole={this.props.auth.get(`role`)}
-                network={this.state.network}
-                edit={this.edit.bind(this)}
                 remove={this.props.actions.networks.removeNetwork}
               />
             </Col>
@@ -68,7 +54,7 @@ export class Networks extends Component {
               <Col md={8} lg={8} mdOffset={2} lgOffset={2}>
                 {this.state.showNetworkForm ?
                   <Col md={12} lg={12}>
-                    <NetworkForm network={this.state.network} toggle={this.toggleForm.bind(this)} submit={this.submit.bind(this)} removeNetwork={this.props.actions.networks.removeNetwork} edit={this.edit.bind(this)}/>
+                    <NetworkForm toggle={this.toggleForm.bind(this)} submit={this.submit.bind(this)}/>
                   </Col>
                 :
                   <Col md={3} lg={3}>
@@ -83,6 +69,19 @@ export class Networks extends Component {
               </Col>
             </Row>
           }
+          <Row>
+            <Col md={2} lg={2} mdOffset={5} lgOffset={5}>
+              <Pagination
+                total={this.props.networks.get(`networksList`).size / 10 + 1}
+                display={5}
+                current={this.state.currentPage}
+                style={{
+                  width : `100%`
+                }}
+                onChange={(value) => this.setState({ currentPage : value })}
+              />
+            </Col>
+          </Row>
         </Grid>
       </div>
     );

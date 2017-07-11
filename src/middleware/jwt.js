@@ -61,7 +61,7 @@ export function runAuthorizedAction(action, next, token){
   };
   return next(authorizedAction);
 }
-//600000
+
 export default store => next => action => {
   if (action[CALL_API]){
     const [request, success, failure] = action[CALL_API].types;
