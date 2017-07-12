@@ -8,24 +8,16 @@ import {
   TableRowColumn,
   FontIcon
 } from 'material-ui';
+import { Link } from 'react-router-dom';
 
 export default class DevicesTable extends Component {
-
-  edit(id){
-    this.props.edit(id);
-  }
-
-  info(id){
-    this.props.info(id);
-  }
-
   render(){
     return (
       <Table
         fixedFooter={false}
         fixedHeader={true}
         selectable={false}
-        height={`400px`}
+        height={`510px`}
       >
         <TableHeader
           adjustForCheckbox={false}
@@ -47,11 +39,23 @@ export default class DevicesTable extends Component {
             <TableRow
               key={index}
             >
-              <TableRowColumn key={`${index}-name`}>{item.name}</TableRowColumn>
+              <TableRowColumn key={`${index}-name`}>
+                <Link
+                  to={{
+                    pathname : `/device/${item.id}`,
+                    state : {
+                      device : item,
+                      networks : this.props.networks
+                    }
+                  }}
+                >
+                  {item.name}
+                </Link>
+              </TableRowColumn>
               <TableRowColumn key={`${index}-network`}>{this.props.networks.find(network => item.networkId === network.id).name}</TableRowColumn>
               <TableRowColumn key={`${index}-operation`}>{item.isBlocked ? `Blocked` : `Normal`}</TableRowColumn>
               <TableRowColumn key={`${index}-data`}>{JSON.stringify(item.data)}</TableRowColumn>
-              <TableRowColumn><FontIcon className="material-icons" onTouchTap={this.info.bind(this, item.id)} style={{ cursor : `pointer` }}>info</FontIcon><FontIcon className="material-icons" onTouchTap={this.edit.bind(this, item.id)} style={{ cursor : `pointer` }}>edit</FontIcon><FontIcon className="material-icons" onTouchTap={this.props.removeDevice.bind(this, item.id)} style={{ cursor : `pointer` }}>close</FontIcon></TableRowColumn>
+              <TableRowColumn><FontIcon className="material-icons" onTouchTap={this.props.removeDevice.bind(this, item.id)} style={{ cursor : `pointer` }}>close</FontIcon></TableRowColumn>
             </TableRow>
           )}
         </TableBody>

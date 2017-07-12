@@ -118,13 +118,6 @@ export function setDeviceId(id){
     });
 }
 
-export function removeDeviceId(){
-  return dispatch => 
-    dispatch({
-      type : constants.polling.REMOVE_DEVICE
-    })
-}
-
 export function setTimePeriod(from, to){
   return (dispatch, getState) => {
     dispatch({
@@ -170,5 +163,13 @@ export function getDeviceNotificationPollPeriod(id, from, to){
           end : to
         }
       }
+    })
+}
+
+export function clearPolling(){
+  return dispatch =>
+    dispatch({
+      type : constants.polling.CLEAR_POLLING_INFO,
+      payload : null
     })
 }

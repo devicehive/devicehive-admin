@@ -12,6 +12,7 @@ import Users from './components/pages/Users';
 import Networks from './components/pages/Networks';
 import Network from './components/pages/Network';
 import Devices from './components/pages/Devices';
+import Device from './components/pages/Device';
 import JWT from './components/pages/JWT';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -44,12 +45,19 @@ render(
               <Network/>
             </ProtectedRoute>
         }/>
-        <Route exact path="/devices" render={
+        <Route path="/devices" render={
           props => 
           <ProtectedRoute {...props}>
             <Devices/>
           </ProtectedRoute>
         }/>
+        <Route path="/device/:id" render={
+          props => 
+          <ProtectedRoute {...props}>
+            <Device/>
+          </ProtectedRoute>
+        }
+        />
         <Route path="/jwt" render={
           props => 
           <ProtectedRoute {...props}>

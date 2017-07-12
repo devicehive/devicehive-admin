@@ -72,7 +72,7 @@ export class Networks extends Component {
           <Row>
             <Col md={2} lg={2} mdOffset={5} lgOffset={5}>
               <Pagination
-                total={this.props.networks.get(`networksList`).size / 10 + 1}
+                total={Math.ceil(this.props.networks.get(`networksList`).size / 10)}
                 display={5}
                 current={this.state.currentPage}
                 style={{

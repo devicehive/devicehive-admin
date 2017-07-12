@@ -22,24 +22,13 @@ export default class DeviceForm extends Component {
       name : ``,
       networkId : ``,
       isBlocked : false,
-      data : ``
+      data : {},
+      error : ``
     };
   }
 
-  componentWillMount(){
-    if (this.props.device){
-      this.setState({
-        id : this.props.device.id,
-        name : this.props.device.name,
-        networkId : this.props.device.networkId,
-        isBlocked : this.props.device.isBlocked,
-        data : this.props.device.data
-      })
-    }
-  }
-
   submit(){
-    if (!this.props.device){
+    if (this.state.error === ``){
       this.props.submit({
         id : randomstring.generate(36),
         name : this.state.name,
@@ -47,25 +36,7 @@ export default class DeviceForm extends Component {
         isBlocked : this.state.isBlocked,
         data : this.state.data
       });
-    } else {
-      this.props.submit({
-        id : this.state.id,
-        name : this.state.name,
-        networkId : this.state.networkId,
-        isBlocked : this.state.isBlocked,
-        data : this.state.data
-      });
     }
-  }
-
-  componentWillReceiveProps(nextProps){
-    this.setState({
-      id : nextProps.device.id,
-      name : nextProps.device.name,
-      networkId : nextProps.device.networkId,
-      isBlocked : nextProps.device.isBlocked,
-      data : nextProps.device.data
-    })
   }
 
   render(){
@@ -87,7 +58,6 @@ export default class DeviceForm extends Component {
             <TextField
               id="deviceName"
               type="text"
-              disabled={this.props.info}
               fullWidth={true}
               floatingLabelText="Name"
               autoComplete="off"
@@ -100,7 +70,6 @@ export default class DeviceForm extends Component {
               floatingLabelText="Network"
               fullWidth={true}
               id="deviceNetwork"
-              disabled={this.props.info}
               value={this.state.networkId}
               onChange={(event, index, value) => this.setState({ networkId : value })}
             >
@@ -117,7 +86,6 @@ export default class DeviceForm extends Component {
               floatingLabelText="Operation"
               fullWidth={true}
               id="deviceOperation"
-              disabled={this.props.info}
               value={this.state.isBlocked}
               onChange={(event, index, value) => this.setState({ isBlocked : value })}
             >
@@ -137,11 +105,21 @@ export default class DeviceForm extends Component {
               type="text"
               fullWidth={true}
               floatingLabelText="Data"
+              errorText={this.state.error}
               autoComplete="off"
-              disabled={this.props.info}
               multiLine={true}
-              value={JSON.stringify(this.state.data)}
-              onChange={(event, value) => this.setState({ data : value })}
+              value={typeof this.state.data === `object` ? JSON.stringify(this.state.data) : this.state.data}
+              onChange={(event, value) => {
+                const newState = Object.assign({}, this.state);
+                try {
+                  newState.data = JSON.parse(value);
+                  newState.error = ``;
+                } catch (err) {
+                  newState.data = value;
+                  newState.error = `Not a valid JSON`;
+                }
+                this.setState(newState);
+              }}
             />
           </Col>
         </CardText>

@@ -86,9 +86,6 @@ export default function polling(state = initialState, action){
   case constants.polling.SET_DEVICE:
     return state
       .set(`device`, action.payload);
-  case constants.polling.REMOVE_DEVICE:
-    return state
-      .set(`device`, ``);
   case constants.polling.SET_TIME_PERIOD:
     return state
       .set(`from`, action.payload.from)
@@ -122,6 +119,14 @@ export default function polling(state = initialState, action){
           action.payload
         ));
   case constants.auth.LOGOUT:
+    return state
+      .set(`tab`, `command`)
+      .set(`device`, ``)
+      .set(`from`, ``)
+      .set(`to`, ``)
+      .set(`commandsPoll`, List([]))
+      .set(`notificationsPoll`, List([]));
+  case constants.polling.CLEAR_POLLING_INFO:
     return state
       .set(`tab`, `command`)
       .set(`device`, ``)
