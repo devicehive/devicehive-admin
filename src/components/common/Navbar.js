@@ -11,7 +11,8 @@ const menuItems = [
   { text : `Networks`, link : `/networks`, access : [`admin`, `user`], show : true },
   { text : `Devices`, link : `/devices`, access : [`admin`, `user`], show : true },
   { text : `Device`, link : `/device`, access : [`admin`, `user`], show : false },
-  { text : `JWT`, link : `/jwt`, access : [`admin`, `user` ], show : true }
+  { text : `JWT`, link : `/jwt`, access : [`admin`, `user` ], show : true },
+  { text : `Profile`, link : `/profile`, access : [`admin`, `user`], show : true }
 ];
 
 export default class Navbar extends Component {

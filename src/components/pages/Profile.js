@@ -6,39 +6,26 @@ import actions from '../../actions';
 import Navbar from '../common/Navbar';
 import {
   TextField,
-  RaisedButton,
   SelectField,
   MenuItem,
-  Subheader
+  RaisedButton
 } from 'material-ui';
-import { withRouter } from 'react-router';
-import NetworksTable from '../tables/NetworksTable';
 
-export class User extends Component {
+export class Profile extends Component {
   constructor(props){
     super(props);
     this.state = {
       user : {},
       edit : false,
-      error : ``,
-      network : null
+      error : ``
     };
   }
 
   componentWillMount(){
-    this.props.actions.users.getUser(this.props.match.params.id)
-    .then(() => {
-      this.setState({
-        user : Object.assign({}, this.props.users.get(`user`).toJS())
-      })
-    });
-    this.props.actions.networks.getNetworks();
-  }
-
-  componentWillReceiveProps(nextProps){
-    this.setState({
-      user : Object.assign({}, nextProps.users.get(`user`).toJS())
-    })
+    this.props.actions.profile.getProfile()
+    .then(() => this.setState({
+      user : Object.assign({}, this.props.profile.get(`user`).toJS())
+    }))
   }
 
   setEdit(){
@@ -49,7 +36,7 @@ export class User extends Component {
 
   submit(){
     if (this.state.error === ``){
-      this.props.actions.users.saveUser(this.state.user);
+      this.props.actions.profile.updateProfile(this.state.user);
       this.setState({
         edit : false
       })
@@ -58,24 +45,16 @@ export class User extends Component {
 
   cancel(){
     this.setState({
-      user : Object.assign({}, this.props.users.get(`user`).toJS()),
+      user : Object.assign({}, this.props.profile.get(`user`).toJS()),
       edit : false,
       error : ``
     })
   }
 
-  unassignNetwork(networkId){
-    this.props.actions.users.unassignNetwork(this.state.user.id, networkId);
-  }
-
-  assignNetwork(){
-    this.props.actions.users.assignNetwork(this.state.user.id, this.state.network);
-  }
-
   render(){
     return (
       <div>
-        <Navbar locationPath={this.props.location.pathname.substring(0, this.props.location.pathname.lastIndexOf(`/`))} showDrawer={false} authenticated={true} logout={this.props.actions.logout} userRole={this.props.auth.get(`role`)}/>
+        <Navbar locationPath={this.props.location.pathname} showDrawer={true} authenticated={true} logout={this.props.actions.logout} userRole={this.props.auth.get(`role`)}/>
         <Grid fluid>
           <Row>
             <Col md={8} lg={8} mdOffset={2} lgOffset={2}>
@@ -96,6 +75,50 @@ export class User extends Component {
                     onChange={(event, value) => {
                       const newState = Object.assign({}, this.state);
                       newState.user.login = value;
+                      this.setState(newState);
+                    }}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col md={6} lg={6}>
+                  <TextField
+                    id="userPassword"
+                    type="password"
+                    disabled={!this.state.edit}
+                    fullWidth={true}
+                    floatingLabelText="Password"
+                    autoComplete="off"
+                    value={this.state.user.password}
+                    onTouchTap={this.setEdit.bind(this)}
+                    style={{
+                      cursor : this.state.edit ? `text` : `pointer`
+                    }}
+                    onChange={(event, value) => {
+                      const newState = Object.assign({}, this.state);
+                      newState.user.password = value;
+                      this.setState(newState);
+                    }}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col md={6} lg={6}>
+                  <TextField
+                    id="userOldPassword"
+                    type="password"
+                    disabled={!this.state.edit}
+                    fullWidth={true}
+                    floatingLabelText="Old Password"
+                    autoComplete="off"
+                    value={this.state.user.oldPassword}
+                    onTouchTap={this.setEdit.bind(this)}
+                    style={{
+                      cursor : this.state.edit ? `text` : `pointer`
+                    }}
+                    onChange={(event, value) => {
+                      const newState = Object.assign({}, this.state);
+                      newState.user.oldPassword = value;
                       this.setState(newState);
                     }}
                   />
@@ -193,75 +216,20 @@ export class User extends Component {
                   />
                 </Col>
               </Row>
-              {this.state.edit ? 
-                <Row>
-                  <Col md={6} lg={6}>
-                    <Row>
-                      <Col md={6} lg={6}>
-                        <RaisedButton primary={true} label="Save" fullWidth={true} onTouchTap={this.submit.bind(this)}/>
-                      </Col>
-                      <Col md={6} lg={6}>
-                        <RaisedButton label="Cancel" fullWidth={true} onTouchTap={this.cancel.bind(this)}/>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-              :
-                <Row>
-                  <Col md={6} lg={6}>
-                    <Row>
-                      <Col md={6} lg={6}>
-                        <RaisedButton
-                          label="Back"
-                          fullWidth={true}
-                          onTouchTap={() => this.props.history.goBack()}
-                        />
-                      </Col>
-                    </Row> 
-                  </Col>
-                </Row>
+              {this.state.edit && 
+              <Row>
+                <Col md={6} lg={6}>
+                  <Row>
+                    <Col md={6} lg={6}>
+                      <RaisedButton primary={true} label="Save" fullWidth={true} onTouchTap={this.submit.bind(this)}/>
+                    </Col>
+                    <Col md={6} lg={6}>
+                      <RaisedButton label="Cancel" fullWidth={true} onTouchTap={this.cancel.bind(this)}/>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
               }
-              <Row>
-                <NetworksTable
-                  networks={this.state.user.networks}
-                  userRole={this.props.auth.get(`role`)}
-                  remove={this.unassignNetwork.bind(this)}
-                />
-              </Row>
-              <Row>
-                <Col md={6} lg={6}>
-                  <Subheader
-                    style={{
-                      fontSize : `16px`
-                    }}
-                  >
-                    Grant access:
-                  </Subheader>
-                </Col>
-              </Row>
-              <Row>
-                <Col md={6} lg={6}>
-                  <SelectField
-                    floatingLabelText="Network"
-                    fullWidth={true}
-                    id="userNetwork"
-                    value={this.state.network}
-                    onChange={(event, index, value) => this.setState({ network : value })}
-                  >
-                    {this.props.networks.get(`networksList`).map((network, i) =>
-                      <MenuItem value={network.id} key={i}
-                        primaryText={network.name}
-                      >
-                      </MenuItem>)
-                    }
-                  </SelectField>
-                </Col>
-              </Row>
-              <Row>
-                <Col md={3} lg={3}>
-                  <RaisedButton primary={true} label="Grant" fullWidth={true} onTouchTap={this.assignNetwork.bind(this)}/>
-                </Col>
-              </Row>
             </Col>
           </Row>
         </Grid>
@@ -273,19 +241,17 @@ export class User extends Component {
 export function mapStateToProps(state){
   return {
     auth : state.auth,
-    users : state.users,
-    networks : state.networks
-  }
+    profile : state.profile
+  };
 }
 
 export function mapDispatchToProps(dispatch){
   return {
     actions : {
       logout : bindActionCreators(actions.auth.logoutUser, dispatch),
-      users : bindActionCreators(actions.users, dispatch),
-      networks : bindActionCreators(actions.networks, dispatch)
+      profile : bindActionCreators(actions.profile, dispatch)
     }
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(User));
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

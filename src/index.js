@@ -15,6 +15,7 @@ import Network from './components/pages/Network';
 import Devices from './components/pages/Devices';
 import Device from './components/pages/Device';
 import JWT from './components/pages/JWT';
+import Profile from './components/pages/Profile';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -71,6 +72,13 @@ render(
             <JWT/>
           </ProtectedRoute>
         }/>
+        <Route path="/profile" render={
+          props => 
+          <ProtectedRoute {...props}>
+            <Profile/>
+          </ProtectedRoute>
+        }
+        />
       </div>
     </MuiThemeProvider>
   </HashRouter>

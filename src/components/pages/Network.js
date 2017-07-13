@@ -132,6 +132,7 @@ export function mapStateToProps(state){
 export function mapDispatchToProps(dispatch){
   return {
     actions : {
+      logout : bindActionCreators(actions.auth.logoutUser, dispatch),
       networks : bindActionCreators(actions.networks, dispatch)
     }
   };

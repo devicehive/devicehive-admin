@@ -4,6 +4,7 @@ import * as networks from './networks';
 import * as polling from './polling';
 import * as jwt from './jwt';
 import * as users from './users';
+import * as profile from './profile';
 
 const constants = {
   auth,
@@ -11,7 +12,8 @@ const constants = {
   networks,
   polling,
   jwt,
-  users
+  users,
+  profile
 };
 
 export default constants;
