@@ -6,6 +6,7 @@ import { AppBar, Drawer, MenuItem, FlatButton } from 'material-ui';
 const menuItems = [
   { text : `Login`, link : `/`, access : [`admin`, `user`], show : false },
   { text : `Users`, link : `/users`, access : [`admin`], show : true },
+  { text : `User`, link : `/user`, access : [`admin`], show : false },
   { text : `Network`, link : `/network`, access : [`admin`], show : false },
   { text : `Networks`, link : `/networks`, access : [`admin`, `user`], show : true },
   { text : `Devices`, link : `/devices`, access : [`admin`, `user`], show : true },

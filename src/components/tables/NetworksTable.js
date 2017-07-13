@@ -22,7 +22,10 @@ export default class NetworksTable extends Component {
         fixedFooter={false}
         fixedHeader={true}
         selectable={false}
-        height={`510px`}
+        style={{
+          maxHeight : `510px`,
+          marginTop : `10px`
+        }}
       >
         <TableHeader
           adjustForCheckbox={false}
@@ -40,7 +43,7 @@ export default class NetworksTable extends Component {
         <TableBody
           displayRowCheckbox={false}
         >
-          {this.props.networks.size && this.props.networks.map((network, index) =>
+          {this.props.networks && this.props.networks.length && this.props.networks.map((network, index) =>
             <TableRow
               key={index}
             > 

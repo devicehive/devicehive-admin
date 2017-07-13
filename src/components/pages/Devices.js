@@ -28,6 +28,14 @@ export class Devices extends Component {
       showDeviceForm : !this.state.showDeviceForm
     });
   }
+
+  submit(body){		
+    this.setState({		
+      showDeviceForm : false		
+    });		
+    this.props.actions.devices.saveDevice(body)		
+      .then(() => this.props.actions.devices.getDevices())		
+  }
   
   render(){
     return (

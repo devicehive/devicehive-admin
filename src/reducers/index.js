@@ -3,6 +3,7 @@ import devices from './devices';
 import networks from './networks';
 import polling from './polling';
 import jwt from './jwt';
+import users from './users';
 
 import { combineReducers } from 'redux';
 
@@ -11,5 +12,6 @@ export default combineReducers({
   devices,
   networks,
   polling,
-  jwt
+  jwt,
+  users
 });

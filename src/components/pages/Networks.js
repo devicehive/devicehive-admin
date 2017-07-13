@@ -43,7 +43,7 @@ export class Networks extends Component {
           <Row>
             <Col md={8} lg={8} mdOffset={2} lgOffset={2}>
               <NetworksTable
-                networks={this.props.networks.get(`networksList`).slice(0 + (this.state.currentPage - 1) * 10, this.state.currentPage * 10)}
+                networks={this.props.networks.get(`networksList`).slice(0 + (this.state.currentPage - 1) * 10, this.state.currentPage * 10).toJS()}
                 userRole={this.props.auth.get(`role`)}
                 remove={this.props.actions.networks.removeNetwork}
               />

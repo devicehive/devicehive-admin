@@ -9,6 +9,7 @@ import './index.css';
 
 import Login from './components/pages/Login';
 import Users from './components/pages/Users';
+import User from './components/pages/User';
 import Networks from './components/pages/Networks';
 import Network from './components/pages/Network';
 import Devices from './components/pages/Devices';
@@ -32,6 +33,12 @@ render(
           <ProtectedRoute {...props}>
             <Users/>
           </ProtectedRoute>
+        }/>
+        <Route path="/user/:id" render={
+            props =>
+            <ProtectedRoute {...props}>
+              <User/>
+            </ProtectedRoute>
         }/>
         <Route path="/networks" render={
           props => 
