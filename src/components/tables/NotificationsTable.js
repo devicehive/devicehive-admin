@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import {
   Table,
   TableBody,
@@ -7,10 +6,23 @@ import {
   TableRow,
   TableRowColumn
 } from 'material-ui';
+import React, { Component } from 'react';
 import moment from 'moment';
 
+/**
+ * Notifications table component
+ * 
+ * @export
+ * @class NotificationsTable
+ * @extends {Component}
+ */
 export class NotificationsTable extends Component {
-
+  /**
+   * Render
+   * 
+   * @returns 
+   * @memberof NotificationsTable
+   */
   render(){
     return (
       <Table

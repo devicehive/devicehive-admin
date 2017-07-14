@@ -1,13 +1,21 @@
-import constants from '../constants';
 import { List, Map } from 'immutable';
+import constants from '../constants';
 
 const initialState = Map({
   networksList : List([]),
   network : Map({})
 });
 
+/**
+ * Networks reducer
+ * 
+ * @export
+ * @param {Object} [state=initialState] 
+ * @param {Object} action 
+ * @returns 
+ */
 export default function networks(state = initialState, action){
-  switch(action.type){
+  switch (action.type){
   case constants.networks.GET_NETWORKS_REQUEST:
     return state
       .set(`networksList`, List([]));

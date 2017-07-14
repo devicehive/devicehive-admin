@@ -1,13 +1,24 @@
-import React, { Component } from 'react';
+import { Col, Grid, Row } from 'react-flexbox-grid';
+import { RaisedButton, TextField } from 'material-ui';
+import { Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { Grid, Row, Col } from 'react-flexbox-grid';
-import { TextField, RaisedButton } from 'material-ui';
-import actions from '../../actions';
+import React, { Component } from 'react';
 import Navbar from '../common/Navbar';
+import actions from '../../actions';
 
+/**
+ * Login page
+ * 
+ * @export
+ * @class Login
+ * @extends {Component}
+ */
 export class Login extends Component {
+  /**
+   * Creates an instance of Login.
+   * @memberof Login
+   */
   constructor(){
     super();
     this.state = {
@@ -15,17 +26,35 @@ export class Login extends Component {
       password : ``
     };
   }
-
+  
+  /**
+   * Login info handler
+   * 
+   * @param {Object} event 
+   * @param {String} value 
+   * @memberof Login
+   */
   setLoginInfo(event, value){
     this.setState({
       [event.target.id] : value
     });
   }
 
+  /**
+   * Submit login
+   * 
+   * @memberof Login
+   */
   login(){
     this.props.actions.auth.loginUser(this.state.login, this.state.password);
   }
 
+  /**
+   * Render
+   * 
+   * @returns 
+   * @memberof Login
+   */
   render(){
     return (
       this.props.auth.get(`isAuthenticated`) ?
@@ -74,12 +103,26 @@ export class Login extends Component {
   }
 }
 
+/**
+ * Redux store mapper
+ * 
+ * @export
+ * @param {Object} state 
+ * @returns 
+ */
 export function mapStateToProps(state){
   return {
     auth : state.auth
   };
 }
 
+/**
+ * Redux actions mapper
+ * 
+ * @export
+ * @param {Function} dispatch 
+ * @returns 
+ */
 export function mapDispatchToProps(dispatch){
   return {
     actions : {

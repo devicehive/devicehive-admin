@@ -1,6 +1,13 @@
 import { CALL_API } from '../middleware/api';
 import constants from '../constants';
 
+/**
+ * Action creator for networks fetching
+ * 
+ * @export
+ * @param {Object} filter 
+ * @returns 
+ */
 export function getNetworks(filter){
   return dispatch => {
     dispatch({
@@ -13,6 +20,13 @@ export function getNetworks(filter){
   }
 }
 
+/**
+ * Action creators for network creation
+ * 
+ * @export
+ * @param {Object} body 
+ * @returns 
+ */
 export function createNetwork(body){
   return dispatch =>
     dispatch({
@@ -26,6 +40,13 @@ export function createNetwork(body){
     .then(() => dispatch(getNetworks()));
 }
 
+/**
+ * Action creator for network update
+ * 
+ * @export
+ * @param {Object} body 
+ * @returns 
+ */
 export function updateNetwork(body){
   return dispatch => 
     dispatch({
@@ -39,6 +60,13 @@ export function updateNetwork(body){
     .then(() => dispatch(getNetworks()));
 }
 
+/**
+ * Action creator for network removal
+ * 
+ * @export
+ * @param {String} id 
+ * @returns 
+ */
 export function removeNetwork(id){
   return dispatch =>
     dispatch({

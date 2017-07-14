@@ -1,18 +1,30 @@
-import React, { Component } from 'react';
 import {
+  FontIcon,
   Table,
   TableBody,
   TableHeader,
   TableHeaderColumn,
   TableRow,
-  TableRowColumn,
-  FontIcon
+  TableRowColumn
 } from 'material-ui';
 import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
 import moment from 'moment';
 
+/**
+ * Users table component
+ * 
+ * @export
+ * @class UsersTable
+ * @extends {Component}
+ */
 export default class UsersTable extends Component {
-
+  /**
+   * Render
+   * 
+   * @returns 
+   * @memberof UsersTable
+   */
   render(){
     return (
       <Table

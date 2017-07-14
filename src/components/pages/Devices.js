@@ -1,15 +1,27 @@
-import React, { Component } from 'react';
+import { Col, Grid, Row } from 'react-flexbox-grid';
+import { RaisedButton } from 'material-ui';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Grid, Row, Col } from 'react-flexbox-grid';
-import actions from '../../actions';
-import Navbar from '../common/Navbar';
-import DevicesTable from '../tables/DevicesTable';
-import { RaisedButton } from 'material-ui';
+import React, { Component } from 'react';
 import DeviceForm from '../forms/DeviceForm';
+import DevicesTable from '../tables/DevicesTable';
+import Navbar from '../common/Navbar';
 import Pagination from 'material-ui-pagination';
+import actions from '../../actions';
 
+/**
+ * Devices page
+ * 
+ * @export
+ * @class Devices
+ * @extends {Component}
+ */
 export class Devices extends Component {
+  /**
+   * Creates an instance of Devices.
+   * @param {Object} props 
+   * @memberof Devices
+   */
   constructor(props){
     super(props);
     this.state = {
@@ -18,17 +30,33 @@ export class Devices extends Component {
     };
   }
 
+  /**
+   * Lifecycle
+   * 
+   * @memberof Devices
+   */
   componentWillMount(){
     this.props.actions.devices.getDevices();
     this.props.actions.networks.getNetworks();
   }
 
+  /**
+   * Toggle form handler
+   * 
+   * @memberof Devices
+   */
   toggleForm(){
     this.setState({
       showDeviceForm : !this.state.showDeviceForm
     });
   }
 
+  /**
+   * Form submit handler
+   * 
+   * @param {Object} body 
+   * @memberof Devices
+   */
   submit(body){		
     this.setState({		
       showDeviceForm : false		
@@ -37,6 +65,12 @@ export class Devices extends Component {
       .then(() => this.props.actions.devices.getDevices())		
   }
   
+  /**
+   * Render
+   * 
+   * @returns 
+   * @memberof Devices
+   */
   render(){
     return (
       <div>
@@ -92,6 +126,13 @@ export class Devices extends Component {
   }
 }
 
+/**
+ * Redux store mapper
+ * 
+ * @export
+ * @param {Object} state 
+ * @returns 
+ */
 export function mapStateToProps(state){
   return {
     devices : state.devices,
@@ -101,6 +142,13 @@ export function mapStateToProps(state){
   };
 }
 
+/**
+ * Redux action mapper
+ * 
+ * @export
+ * @param {Function} dispatch 
+ * @returns 
+ */
 export function mapDispatchToProps(dispatch){
   return {
     actions : {

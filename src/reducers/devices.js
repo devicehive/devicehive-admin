@@ -1,12 +1,20 @@
-import constants from '../constants';
 import { List, Map } from 'immutable';
+import constants from '../constants';
 
 const initialState = Map({
   devicesList : List([])
 });
 
+/**
+ * Devices reducer
+ * 
+ * @export
+ * @param {any} [state=initialState] 
+ * @param {any} action 
+ * @returns 
+ */
 export default function devices(state = initialState, action){
-  switch(action.type){
+  switch (action.type){
   case constants.devices.GET_DEVICES_REQUEST:
     return state
       .set(`devicesList`, List([]));

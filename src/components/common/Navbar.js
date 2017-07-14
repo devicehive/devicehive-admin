@@ -1,7 +1,6 @@
+import { AppBar, Drawer, FlatButton, MenuItem } from 'material-ui';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { AppBar, Drawer, MenuItem, FlatButton } from 'material-ui';
-
 
 const menuItems = [
   { text : `Login`, link : `/`, access : [`admin`, `user`], show : false },
@@ -15,7 +14,19 @@ const menuItems = [
   { text : `Profile`, link : `/profile`, access : [`admin`, `user`], show : true }
 ];
 
+/**
+ * Navbar component
+ * 
+ * @export
+ * @class Navbar
+ * @extends {Component}
+ */
 export default class Navbar extends Component {
+  /**
+   * Creates an instance of Navbar.
+   * @param {Object} props 
+   * @memberof Navbar
+   */
   constructor(props){
     super(props);
     this.state = {
@@ -23,25 +34,51 @@ export default class Navbar extends Component {
       checkedIndex : 0
     };
   }
-
+  
+  /**
+   * Lifecycle
+   * 
+   * @memberof Navbar
+   */
   componentWillMount(){
     this.setState({
       checkedIndex : menuItems.findIndex((element, index) => element.link === this.props.locationPath)
     });
   }
 
+  /**
+   * Handler for Drawer toggle
+   * 
+   * @memberof Navbar
+   */
   handleToggle(){
     this.setState({ open : !this.state.open });
   }
 
+  /**
+   * Handler for Drawer close
+   * 
+   * @memberof Navbar
+   */
   handleClose(){
     this.setState({ open : false });
   }
 
+  /**
+   * Logout handler
+   * 
+   * @memberof Navbar
+   */
   logout(){
     this.props.logout();
   }
 
+  /**
+   * Render
+   * 
+   * @returns 
+   * @memberof Navbar
+   */
   render(){
     return (
       <div>

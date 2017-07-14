@@ -1,12 +1,20 @@
-import constants from '../constants';
 import { Map } from 'immutable';
+import constants from '../constants';
 
 const initialState = Map({
   user : Map({})
 });
 
+/**
+ * Profile reducer
+ * 
+ * @export
+ * @param {Object} [state=initialState] 
+ * @param {Object} action 
+ * @returns 
+ */
 export default function profile(state = initialState, action){
-  switch(action.type){
+  switch (action.type){
   case constants.profile.GET_PROFILE_REQUEST:
     return state
       .set(`user`, Map({}));

@@ -1,15 +1,27 @@
-import React, { Component } from 'react';
+import { Col, Grid, Row } from 'react-flexbox-grid';
+import { RaisedButton } from 'material-ui';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Grid, Row, Col } from 'react-flexbox-grid';
-import actions from '../../actions';
+import React, { Component } from 'react';
 import Navbar from '../common/Navbar';
-import NetworksTable from '../tables/NetworksTable';
-import { RaisedButton } from 'material-ui';
 import NetworkForm from '../forms/NetworkForm';
+import NetworksTable from '../tables/NetworksTable';
 import Pagination from 'material-ui-pagination';
+import actions from '../../actions';
 
+/**
+ * Networks page
+ * 
+ * @export
+ * @class Networks
+ * @extends {Component}
+ */
 export class Networks extends Component {
+  /**
+   * Creates an instance of Networks.
+   * @param {Object} props 
+   * @memberof Networks
+   */
   constructor(props){
     super(props);
     this.state = {
@@ -18,16 +30,32 @@ export class Networks extends Component {
     };
   }
 
+  /**
+   * Lifecycle
+   * 
+   * @memberof Networks
+   */
   componentWillMount(){
     this.props.actions.networks.getNetworks();
   }
 
+  /**
+   * Form toggle handler
+   * 
+   * @memberof Networks
+   */
   toggleForm(){
     this.setState({
       showNetworkForm : !this.state.showNetworkForm
     })
   }
 
+  /**
+   * Form submit handler
+   * 
+   * @param {Object} body 
+   * @memberof Networks
+   */
   submit(body){
     this.setState({
       showNetworkForm : false
@@ -35,6 +63,12 @@ export class Networks extends Component {
     this.props.actions.networks.createNetwork(body);
   }
 
+  /**
+   * Render
+   * 
+   * @returns 
+   * @memberof Networks
+   */
   render(){
     return (
       <div>
@@ -88,6 +122,13 @@ export class Networks extends Component {
   }
 }
 
+/**
+ * Redux store mapper
+ * 
+ * @export
+ * @param {Object} state 
+ * @returns 
+ */
 export function mapStateToProps(state){
   return {
     auth : state.auth,
@@ -95,6 +136,13 @@ export function mapStateToProps(state){
   };
 }
 
+/**
+ * Redux action mapper
+ * 
+ * @export
+ * @param {Function} dispatch 
+ * @returns 
+ */
 export function mapDispatchToProps(dispatch){
   return {
     actions : {

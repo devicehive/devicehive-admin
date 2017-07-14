@@ -1,16 +1,29 @@
-import React, { Component } from 'react';
 import {
+  FontIcon,
   Table,
   TableBody,
   TableHeader,
   TableHeaderColumn,
   TableRow,
-  TableRowColumn,
-  FontIcon
+  TableRowColumn
 } from 'material-ui';
 import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
 
+/**
+ * Devices table component
+ * 
+ * @export
+ * @class DevicesTable
+ * @extends {Component}
+ */
 export default class DevicesTable extends Component {
+  /**
+   * Render
+   * 
+   * @returns 
+   * @memberof DevicesTable
+   */
   render(){
     return (
       <Table

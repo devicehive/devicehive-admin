@@ -1,21 +1,39 @@
-import React, { Component } from 'react';
 import {
+  FontIcon,
   Table,
   TableBody,
   TableHeader,
   TableHeaderColumn,
   TableRow,
-  TableRowColumn,
-  FontIcon
+  TableRowColumn
 } from 'material-ui';
 import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
 
+/**
+ * Networks table component
+ * 
+ * @export
+ * @class NetworksTable
+ * @extends {Component}
+ */
 export default class NetworksTable extends Component {
-
+  /**
+   * Network removal handler
+   * 
+   * @param {any} id 
+   * @memberof NetworksTable
+   */
   remove(id){
     this.props.remove(id);
   }
 
+  /**
+   * Render
+   * 
+   * @returns 
+   * @memberof NetworksTable
+   */
   render(){
     return (
       <Table

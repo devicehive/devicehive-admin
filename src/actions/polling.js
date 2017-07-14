@@ -1,8 +1,18 @@
-import constants from '../constants';
 import { CALL_API } from '../middleware/api';
 import { POLL_HISTORY_SIZE } from '../config';
+import constants from '../constants';
+
 const poll = {};
 
+/**
+ * Action creator for updating polling tab
+ * Also starts new polling
+ * 
+ * @export
+ * @param {String} tab 
+ * @param {String} id 
+ * @returns 
+ */
 export function updateTab(tab, id){
   return dispatch => {
     dispatch({
@@ -14,6 +24,15 @@ export function updateTab(tab, id){
   }
 }
 
+/**
+ * Polling function
+ * Related to multiple polling params
+ * 
+ * @export
+ * @param {String} tab 
+ * @param {String} id 
+ * @returns 
+ */
 export function pollData(tab, id){
   return (dispatch, getState) => {
     if (tab === getState().polling.get(`tab`) && 
@@ -46,6 +65,14 @@ export function pollData(tab, id){
   }
 }
 
+/**
+ * Action creator for notification poll request
+ * 
+ * @export
+ * @param {String} id 
+ * @param {String} timestamp 
+ * @returns 
+ */
 export function getDeviceNotificationPoll(id, timestamp){
   return dispatch =>
     dispatch({
@@ -62,6 +89,14 @@ export function getDeviceNotificationPoll(id, timestamp){
     });
 }
 
+/**
+ * Action creator for command poll request
+ * 
+ * @export
+ * @param {String} id 
+ * @param {String} timestamp 
+ * @returns 
+ */
 export function getDeviceCommandPoll(id, timestamp){
   return dispatch => 
     dispatch({
@@ -78,6 +113,13 @@ export function getDeviceCommandPoll(id, timestamp){
     });
 }
 
+/**
+ * Action creator for fetching command poll history
+ * 
+ * @export
+ * @param {String} id 
+ * @returns 
+ */
 export function getDeviceCommandPollHistory(id){
   return dispatch =>
     dispatch({
@@ -94,6 +136,13 @@ export function getDeviceCommandPollHistory(id){
     })
 }
 
+/**
+ * Action creator for fetching notification poll history
+ * 
+ * @export
+ * @param {String} id 
+ * @returns 
+ */
 export function getDeviceNotificationPollHistory(id){
   return dispatch =>
     dispatch({
@@ -110,6 +159,13 @@ export function getDeviceNotificationPollHistory(id){
     })
 }
 
+/**
+ * Action creator for setting current device polling id
+ * 
+ * @export
+ * @param {String} id 
+ * @returns 
+ */
 export function setDeviceId(id){
   return dispatch =>
     dispatch({
@@ -118,6 +174,14 @@ export function setDeviceId(id){
     });
 }
 
+/**
+ * Action creator for configuring polling time period
+ * 
+ * @export
+ * @param {String} from 
+ * @param {String} to 
+ * @returns 
+ */
 export function setTimePeriod(from, to){
   return (dispatch, getState) => {
     dispatch({
@@ -138,6 +202,15 @@ export function setTimePeriod(from, to){
   }
 }
 
+/**
+ * Action creator for fetching command poll by time period
+ * 
+ * @export
+ * @param {String} id 
+ * @param {String} from 
+ * @param {String} to 
+ * @returns 
+ */
 export function getDeviceCommandPollPeriod(id, from, to){
   return dispatch =>
     dispatch({
@@ -152,6 +225,15 @@ export function getDeviceCommandPollPeriod(id, from, to){
     })
 }
 
+/**
+ * Action creator for fetching notification poll by time period
+ * 
+ * @export
+ * @param {String} id 
+ * @param {String} from 
+ * @param {String} to 
+ * @returns 
+ */
 export function getDeviceNotificationPollPeriod(id, from, to){
   return dispatch =>
     dispatch({
@@ -166,6 +248,12 @@ export function getDeviceNotificationPollPeriod(id, from, to){
     })
 }
 
+/**
+ * Action creator for polling params removal
+ * 
+ * @export
+ * @returns 
+ */
 export function clearPolling(){
   return dispatch =>
     dispatch({

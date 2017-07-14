@@ -1,13 +1,21 @@
-import constants from '../constants';
 import { List, Map } from 'immutable';
+import constants from '../constants';
 
 const initialState = Map({
   usersList : List([]),
   user : Map({})
 });
 
+/**
+ * users reducer
+ * 
+ * @export
+ * @param {Object} [state=initialState] 
+ * @param {Object} action 
+ * @returns 
+ */
 export default function users(state = initialState, action){
-  switch(action.type){
+  switch (action.type){
   case constants.users.GET_USERS_REQUEST:
     return state
       .set(`usersList`, List([]));

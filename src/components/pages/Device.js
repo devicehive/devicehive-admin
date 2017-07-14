@@ -1,26 +1,39 @@
+import { Col, Grid, Row } from 'react-flexbox-grid';
+import { 
+  FlatButton,
+  MenuItem,
+  RaisedButton, 
+  SelectField, 
+  Tab,
+  Tabs,
+  TextField
+} from 'material-ui';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Grid, Col, Row } from 'react-flexbox-grid';
-import actions from '../../actions';
-import Navbar from '../common/Navbar';
-import { 
-  TextField, 
-  RaisedButton, 
-  SelectField, 
-  MenuItem,
-  Tabs,
-  Tab,
-  FlatButton 
-} from 'material-ui';
-import CommandsTable from '../tables/CommandsTable';
-import NotificationsTable from '../tables/NotificationsTable';
-import CommandNotificationCreator from '../CommandNotificationCreator';
-import TimeFilter from '../TimeFilter';
 import { withRouter } from 'react-router';
+import CommandNotificationCreator from '../CommandNotificationCreator';
+import CommandsTable from '../tables/CommandsTable';
+import Navbar from '../common/Navbar';
+import NotificationsTable from '../tables/NotificationsTable';
+import TimeFilter from '../TimeFilter';
+import actions from '../../actions';
 import moment from 'moment';
 
+
+/**
+ * Device page
+ * 
+ * @export
+ * @class Device
+ * @extends {Component}
+ */
 export class Device extends Component {
+  /**
+   * Creates an instance of Device.
+   * @param {Object} props 
+   * @memberof Device
+   */
   constructor(props){
     super(props);
     this.state = {
@@ -42,17 +55,32 @@ export class Device extends Component {
     };
   }
 
+  /**
+   * Lifecycle
+   * 
+   * @memberof Device
+   */
   componentDidMount(){
     this.props.actions.polling.setDeviceId(this.state.device.id);
     this.props.actions.polling.updateTab(`command`, this.state.device.id);
   }
 
+  /**
+   * Edit state handler
+   * 
+   * @memberof Device
+   */
   setEdit(){
     this.setState({
       edit : true
     })
   }
 
+  /**
+   * Form submit handler
+   * 
+   * @memberof Device
+   */
   submit(){
     if (this.state.error === ``){
       this.props.actions.devices.saveDevice(this.state.device);
@@ -62,6 +90,11 @@ export class Device extends Component {
     }
   }
 
+  /**
+   * Cancel edition handler
+   * 
+   * @memberof Device
+   */
   cancel(){
     this.setState({
       device : Object.assign({}, this.props.location.state.device),
@@ -71,24 +104,47 @@ export class Device extends Component {
     })
   }
 
+  /**
+   * Tab change handler
+   * 
+   * @param {String} value 
+   * @memberof Device
+   */
   tabChange(value){
     this.clearDateTime(`from`);
     this.clearDateTime(`to`);
     this.props.actions.polling.updateTab(value, this.state.device.id);
   }
 
+  /**
+   * DateTime dialog open
+   * 
+   * @memberof Device
+   */
   openDateTimeDialog(){
     this.setState({
       openDateTimeDialog : true
     })
   }
 
+  /**
+   * DateTime dialog close
+   * 
+   * @memberof Device
+   */
   closeDateTimeDialog(){
     this.setState({
       openDateTimeDialog : false
     })
   }
 
+  /**
+   * Time period setting handler
+   * 
+   * @param {Object} fromDateTime 
+   * @param {Object} toDateTime 
+   * @memberof Device
+   */
   setTimePeriod(fromDateTime, toDateTime){
     this.setState({
       openDateTimeDialog : false
@@ -101,18 +157,40 @@ export class Device extends Component {
     this.props.actions.polling.setTimePeriod(from, to);
   }
 
+  /**
+   * Date change handler
+   * 
+   * @param {String} type 
+   * @param {Object} event 
+   * @param {String} newDate 
+   * @memberof Device
+   */
   changeDate(type, event, newDate){
     const stateCopy = Object.assign({}, this.state);
     stateCopy[type].date = newDate;
     this.setState(stateCopy);
   }
 
+  /**
+   * Time change handler
+   * 
+   * @param {String} type 
+   * @param {Object} event 
+   * @param {String} newTime 
+   * @memberof Device
+   */
   changeTime(type, event, newTime){
     const stateCopy = Object.assign({}, this.state);
     stateCopy[type].time = newTime;
     this.setState(stateCopy);
   }
 
+  /**
+   * Date/time cleaning handler
+   * 
+   * @param {any} type 
+   * @memberof Device
+   */
   clearDateTime(type){
     this.setState({
       [type] : {
@@ -121,13 +199,23 @@ export class Device extends Component {
       }
     })
   }
-
+  
+  /**
+   * Command/Notification dialog open
+   * 
+   * @memberof Device
+   */
   openCommandNotificationDialog(){
     this.setState({
       openCommandNotificationDialog : true
     })
   }
 
+  /**
+   * Command/Notification dialog close
+   * 
+   * @memberof Device
+   */
   closeCommandNotificationDialog(){
     this.setState({
       openCommandNotificationDialog : false,
@@ -135,16 +223,34 @@ export class Device extends Component {
     })
   }
 
+  /**
+   * Command/Notification sender
+   * 
+   * @param {Object} { name, parameters } 
+   * @memberof Device
+   */
   send({ name, parameters }){
     this.props.polling.get(`tab`) === `command` ?
     this.props.actions.devices.sendCommand(this.props.polling.get(`device`), { command : name, parameters : JSON.parse(parameters) }) :
     this.props.actions.devices.sendNotification(this.props.polling.get(`device`), { notification : name, parameters : JSON.parse(parameters) });
   }
 
+  /**
+   * Refresh command handler
+   * 
+   * @param {String} commandId 
+   * @memberof Device
+   */
   refreshCommand(commandId){
     this.props.actions.devices.refreshCommand(this.props.polling.get(`device`), commandId);
   }
 
+  /**
+   * Copy command handler
+   * 
+   * @param {Object} command 
+   * @memberof Device
+   */
   copyCommand(command){
     this.setState({
       command
@@ -152,6 +258,12 @@ export class Device extends Component {
     this.openCommandNotificationDialog();
   }
 
+  /**
+   * Render
+   * 
+   * @returns 
+   * @memberof Device
+   */
   render(){
     return (
       <div>
@@ -389,6 +501,13 @@ export class Device extends Component {
   }
 }
 
+/**
+ * Redux store mapper
+ * 
+ * @export
+ * @param {Object} state 
+ * @returns 
+ */
 export function mapStateToProps(state){
   return {
     auth : state.auth,
@@ -396,6 +515,13 @@ export function mapStateToProps(state){
   }
 }
 
+/**
+ * Redux action mapper
+ * 
+ * @export
+ * @param {Function} dispatch 
+ * @returns 
+ */
 export function mapDispatchToProps(dispatch){
   return {
     actions : {

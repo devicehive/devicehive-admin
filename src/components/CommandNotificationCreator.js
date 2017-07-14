@@ -1,8 +1,20 @@
+import { Col, Grid } from 'react-flexbox-grid';
+import { Dialog, Divider, FlatButton, TextField } from 'material-ui';
 import React, { Component } from 'react';
-import { Grid, Col } from 'react-flexbox-grid';
-import { Dialog, Divider, TextField, FlatButton } from 'material-ui';
 
+/**
+ * Command/Notification creator dialog
+ * 
+ * @export
+ * @class CommandNotificationCreator
+ * @extends {Component}
+ */
 export default class CommandNotificationCreator extends Component {
+  /**
+   * Creates an instance of CommandNotificationCreator.
+   * @param {Object} props 
+   * @memberof CommandNotificationCreator
+   */
   constructor(props){
     super(props);
     this.state = {
@@ -12,12 +24,26 @@ export default class CommandNotificationCreator extends Component {
     };
   }
 
+  /**
+   * Name change handler
+   * 
+   * @param {Object} event 
+   * @param {String} value 
+   * @memberof CommandNotificationCreator
+   */
   nameChange(event, value){
     this.setState({
       name : value
     })
   }
 
+  /**
+   * Parameters change handler
+   * 
+   * @param {Object} event 
+   * @param {String} value 
+   * @memberof CommandNotificationCreator
+   */
   parametersChange(event, value){
     try {
       JSON.parse(value);
@@ -34,6 +60,11 @@ export default class CommandNotificationCreator extends Component {
     });
   }
 
+  /**
+   * Command/Notification sender
+   * 
+   * @memberof CommandNotificationCreator
+   */
   send(){
     if (this.state.error === ``){
       this.props.send(Object.assign({}, this.state));
@@ -45,6 +76,12 @@ export default class CommandNotificationCreator extends Component {
     }
   }
 
+  /**
+   * Render
+   * 
+   * @returns 
+   * @memberof CommandNotificationCreator
+   */
   render(){
     const commandNotificationActions = [
       <FlatButton

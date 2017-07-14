@@ -2,14 +2,16 @@ FROM node:latest
 
 ARG REACT_APP_SERVER_URL
 
+ARG REACT_APP_POLL_HISTORY_SIZE
+
 RUN mkdir -p /usr/src/app
 
 WORKDIR /usr/src/app
 
 COPY . /usr/src/app
 
-RUN npm install pushstate-server -g && npm install && REACT_APP_SERVER_URL=$REACT_APP_SERVER_URL npm run build
+RUN npm install serve -g && npm install && REACT_APP_SERVER_URL=$REACT_APP_SERVER_URL REACT_APP_POLL_HISTORY_SIZE=$REACT_APP_POLL_HISTORY_SIZE npm run build
 
-EXPOSE 9000
+EXPOSE 5000
 
-CMD ["pushstate-server", "build"]
+CMD serve -s build

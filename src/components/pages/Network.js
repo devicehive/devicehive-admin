@@ -1,13 +1,25 @@
-import React, { Component } from 'react';
+import { Col, Grid, Row } from 'react-flexbox-grid';
+import { RaisedButton, TextField } from 'material-ui';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Grid, Row, Col } from 'react-flexbox-grid';
-import actions from '../../actions';
-import Navbar from '../common/Navbar';
-import { TextField, RaisedButton } from 'material-ui';
 import { withRouter } from 'react-router';
+import React, { Component } from 'react';
+import Navbar from '../common/Navbar';
+import actions from '../../actions';
 
+/**
+ * Network page
+ * 
+ * @export
+ * @class Network
+ * @extends {Component}
+ */
 export class Network extends Component {
+  /**
+   * Creates an instance of Network.
+   * @param {Object} props 
+   * @memberof Network
+   */
   constructor(props){
     super(props);
     this.state = {
@@ -16,12 +28,22 @@ export class Network extends Component {
     };
   }
 
+  /**
+   * Edit handler
+   * 
+   * @memberof Network
+   */
   setEdit(){
     this.setState({
       edit : true
     })
   }
 
+  /**
+   * Submit handler
+   * 
+   * @memberof Network
+   */
   submit(){
     this.props.actions.networks.updateNetwork(this.state.network);
     this.setState({
@@ -29,6 +51,11 @@ export class Network extends Component {
     })
   }
 
+  /**
+   * Cancel edition handler
+   * 
+   * @memberof Network
+   */
   cancel(){
     this.setState({
       network : Object.assign({}, this.props.location.state.network),
@@ -36,6 +63,12 @@ export class Network extends Component {
     });
   }
 
+  /**
+   * Render
+   * 
+   * @returns 
+   * @memberof Network
+   */
   render(){
     return (
       <div>
@@ -123,12 +156,26 @@ export class Network extends Component {
   }
 }
 
+/**
+ * Redux store mapper
+ * 
+ * @export
+ * @param {Object} state 
+ * @returns 
+ */
 export function mapStateToProps(state){
   return {
     auth : state.auth
   }
 }
 
+/**
+ * Redux action mapper
+ * 
+ * @export
+ * @param {Function} dispatch 
+ * @returns 
+ */
 export function mapDispatchToProps(dispatch){
   return {
     actions : {

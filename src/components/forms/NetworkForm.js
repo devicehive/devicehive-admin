@@ -1,17 +1,29 @@
-import React, { Component } from 'react';
 import {
   Card,
   CardActions,
   CardHeader,
   CardText,
-  FontIcon,
   Divider,
-  TextField,
-  FlatButton
+  FlatButton,
+  FontIcon,
+  TextField
 } from 'material-ui';
+import React, { Component } from 'react';
 import { Col } from 'react-flexbox-grid';
 
-export default class DeviceForm extends Component {
+/**
+ * Network creation form
+ * 
+ * @export
+ * @class NetworkForm
+ * @extends {Component}
+ */
+export default class NetworkForm extends Component {
+  /**
+   * Creates an instance of NetworkForm.
+   * @param {Object} props 
+   * @memberof NetworkForm
+   */
   constructor(props){
     super(props);
     this.state = {
@@ -20,10 +32,21 @@ export default class DeviceForm extends Component {
     };
   }
 
+  /**
+   * Form submit handler
+   * 
+   * @memberof NetworkForm
+   */
   submit(){
     this.props.submit(this.state);
   }
 
+  /**
+   * Render
+   * 
+   * @returns 
+   * @memberof NetworkForm
+   */
   render(){
     return (
       <Card>

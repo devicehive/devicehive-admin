@@ -1,6 +1,12 @@
 import { CALL_API } from '../middleware/api';
 import constants from '../constants';
 
+/**
+ * Action creator for fetching user profile
+ * 
+ * @export
+ * @returns 
+ */
 export function getProfile(){
   return dispatch =>
     dispatch({
@@ -11,6 +17,13 @@ export function getProfile(){
     })
 }
 
+/**
+ * Action creator for updating user profile
+ * 
+ * @export
+ * @param {Object} body 
+ * @returns 
+ */
 export function updateProfile(body){
   return dispatch =>
     dispatch({

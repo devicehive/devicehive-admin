@@ -1,17 +1,29 @@
-import React, { Component } from 'react';
+import { Col, Grid, Row } from 'react-flexbox-grid';
+import {
+  MenuItem,
+  RaisedButton,
+  SelectField,
+  TextField
+} from 'material-ui';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Grid, Col, Row } from 'react-flexbox-grid';
-import actions from '../../actions';
+import React, { Component } from 'react';
 import Navbar from '../common/Navbar';
-import {
-  TextField,
-  SelectField,
-  MenuItem,
-  RaisedButton
-} from 'material-ui';
+import actions from '../../actions';
 
+/**
+ * Profile page
+ * 
+ * @export
+ * @class Profile
+ * @extends {Component}
+ */
 export class Profile extends Component {
+  /**
+   * Creates an instance of Profile.
+   * @param {Object} props 
+   * @memberof Profile
+   */
   constructor(props){
     super(props);
     this.state = {
@@ -21,6 +33,11 @@ export class Profile extends Component {
     };
   }
 
+  /**
+   * Lifecycle
+   * 
+   * @memberof Profile
+   */
   componentWillMount(){
     this.props.actions.profile.getProfile()
     .then(() => this.setState({
@@ -28,12 +45,22 @@ export class Profile extends Component {
     }))
   }
 
+  /**
+   * Edit Form handler
+   * 
+   * @memberof Profile
+   */
   setEdit(){
     this.setState({
       edit : true
     })
   }
 
+  /**
+   * Form submit handler
+   * 
+   * @memberof Profile
+   */
   submit(){
     if (this.state.error === ``){
       this.props.actions.profile.updateProfile(this.state.user);
@@ -43,6 +70,11 @@ export class Profile extends Component {
     }
   }
 
+  /**
+   * Cancel form editing handler
+   * 
+   * @memberof Profile
+   */
   cancel(){
     this.setState({
       user : Object.assign({}, this.props.profile.get(`user`).toJS()),
@@ -51,6 +83,12 @@ export class Profile extends Component {
     })
   }
 
+  /**
+   * Render
+   * 
+   * @returns 
+   * @memberof Profile
+   */
   render(){
     return (
       <div>
@@ -238,6 +276,13 @@ export class Profile extends Component {
   }
 }
 
+/**
+ * Redux store mapper
+ * 
+ * @export
+ * @param {any} state 
+ * @returns 
+ */
 export function mapStateToProps(state){
   return {
     auth : state.auth,
@@ -245,6 +290,13 @@ export function mapStateToProps(state){
   };
 }
 
+/**
+ * Redux action mapper
+ * 
+ * @export
+ * @param {any} dispatch 
+ * @returns 
+ */
 export function mapDispatchToProps(dispatch){
   return {
     actions : {

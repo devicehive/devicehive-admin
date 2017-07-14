@@ -2,6 +2,14 @@ import { CALL_API } from '../middleware/api';
 import constants from '../constants';
 import jwtDecode from 'jwt-decode';
 
+/**
+ * Action creator for creating JWT token
+ * 
+ * @export
+ * @param {String} token 
+ * @param {String} [expiration=``] 
+ * @returns 
+ */
 export function createToken(token, expiration = ``){
   const userData = jwtDecode(token).payload;
   userData.expiration = expiration;

@@ -1,6 +1,13 @@
 import { CALL_API } from '../middleware/api';
 import constants from '../constants';
 
+/**
+ * Action creator for fetching users list
+ * 
+ * @export
+ * @param {Object} filter 
+ * @returns 
+ */
 export function getUsers(filter){
   return dispatch => 
     dispatch({
@@ -12,6 +19,13 @@ export function getUsers(filter){
     })
 }
 
+/**
+ * Action creator for creating user
+ * 
+ * @export
+ * @param {Object} body 
+ * @returns 
+ */
 export function createUser(body){
   return dispatch =>
     dispatch({
@@ -24,6 +38,13 @@ export function createUser(body){
     })
 }
 
+/**
+ * Action creator for user removal
+ * 
+ * @export
+ * @param {String} id 
+ * @returns 
+ */
 export function removeUser(id){
   return dispatch =>
     dispatch({
@@ -36,6 +57,13 @@ export function removeUser(id){
     .then(dispatch(getUsers()))
 }
 
+/**
+ * Action creator for fetching user
+ * 
+ * @export
+ * @param {String} id 
+ * @returns 
+ */
 export function getUser(id){
   return dispatch =>
     dispatch({
@@ -46,6 +74,13 @@ export function getUser(id){
     })
 }
 
+/**
+ * Action creator for updating user
+ * 
+ * @export
+ * @param {Object} body 
+ * @returns 
+ */
 export function saveUser(body){
   return dispatch =>
     dispatch({
@@ -58,6 +93,14 @@ export function saveUser(body){
     })
 }
 
+/**
+ * Action creator for assigning network to user
+ * 
+ * @export
+ * @param {String} userId 
+ * @param {String} networkId 
+ * @returns 
+ */
 export function assignNetwork(userId, networkId){
   return dispatch =>
     dispatch({
@@ -70,6 +113,14 @@ export function assignNetwork(userId, networkId){
     .then(() => dispatch(getUser(userId)));
 }
 
+/**
+ * Action creator for unassigning network from user
+ * 
+ * @export
+ * @param {String} userId 
+ * @param {String} networkId 
+ * @returns 
+ */
 export function unassignNetwork(userId, networkId){
   return dispatch =>
     dispatch({

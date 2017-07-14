@@ -1,9 +1,21 @@
+import { Col, Grid, Row } from 'react-flexbox-grid';
+import { DatePicker, Dialog, Divider, FlatButton, TimePicker } from 'material-ui';
 import React, { Component } from 'react';
-import { Grid, Row, Col } from 'react-flexbox-grid';
-import { Dialog, DatePicker, TimePicker, FlatButton, Divider } from 'material-ui';
 import moment from 'moment';
 
+/**
+ * Token creation dialog
+ * 
+ * @export
+ * @class TokenDialog
+ * @extends {Component}
+ */
 export default class TokenDialog extends Component {
+  /**
+   * Creates an instance of TokenDialog.
+   * @param {Object} props 
+   * @memberof TokenDialog
+   */
   constructor(props){
     super(props);
     this.state = {
@@ -12,6 +24,11 @@ export default class TokenDialog extends Component {
     };
   }
 
+  /**
+   * Token creation handler
+   * 
+   * @memberof TokenDialog
+   */
   createToken(){
     let timestamp = ``;
     if (this.state.date && this.state.time){
@@ -20,12 +37,25 @@ export default class TokenDialog extends Component {
     this.props.createToken(timestamp);
   }
 
+  /**
+   * Date/Time change handler
+   * 
+   * @param {String} key 
+   * @param {Object} event 
+   * @param {String} value 
+   * @memberof TokenDialog
+   */
   changeDateTime(key, event, value){
     this.setState({
       [key] : value
     })
   }
 
+  /**
+   * Date/Time clearing handler
+   * 
+   * @memberof TokenDialog
+   */
   clearDateTime(){
     this.setState({
       date : null,
@@ -33,6 +63,12 @@ export default class TokenDialog extends Component {
     })
   }
 
+  /**
+   * Render
+   * 
+   * @returns 
+   * @memberof TokenDialog
+   */
   render(){
     const tokenActions = [
       <FlatButton
@@ -47,7 +83,7 @@ export default class TokenDialog extends Component {
         onTouchTap={this.createToken.bind(this)}
       />
     ];
-    return(
+    return (
       <Dialog
         title="Token Expiration Form"
         open={this.props.openDialog}

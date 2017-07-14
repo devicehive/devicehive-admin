@@ -1,7 +1,15 @@
 import 'isomorphic-fetch';
-import URLSearchParams from 'url-search-params';
 import { API_URL } from '../config';
+import URLSearchParams from 'url-search-params';
 
+/**
+ * URL with params creator
+ * 
+ * @export
+ * @param {String} urlString 
+ * @param {Object} [params={}] 
+ * @returns 
+ */
 export function urlWithParams(urlString, params = {}){
   const url = new URL(urlString);
   const searchParams = new URLSearchParams();
@@ -12,11 +20,24 @@ export function urlWithParams(urlString, params = {}){
   return url.toString();
 }
 
+/**
+ * Form data encoder
+ * 
+ * @export
+ * @param {Object} formData 
+ */
 export function encodeFormData(formData){
   const searchParams = new URLSearchParams();
   Object.keys(formData).forEach(key => searchParams.set(key, formData[key]));
 }
 
+/**
+ * API request creator
+ * 
+ * @export
+ * @param {Object} { endpoint, query, body, headers = {}, method = `GET`, encoding = `json` } 
+ * @returns 
+ */
 export function callApi({ endpoint, query, body, headers = {}, method = `GET`, encoding = `json` }){
   let fullURL = endpoint.indexOf(API_URL) === -1 ? API_URL + endpoint : endpoint;
   if (query){
@@ -73,6 +94,12 @@ export default store => next => action => {
     throw new Error(`Expected action types to be strings.`)
   }
 
+  /**
+   * Action extractor
+   * 
+   * @param {Object} data 
+   * @returns 
+   */
   function actionWith(data){
     const finalAction = Object.assign({}, action, data);
     delete finalAction[CALL_API];

@@ -1,6 +1,13 @@
 import { CALL_API } from '../middleware/api';
 import constants from '../constants';
 
+/**
+ * Action creator for devices fetch
+ * 
+ * @export
+ * @param {Object} filter 
+ * @returns 
+ */
 export function getDevices(filter){
   return dispatch => {
     dispatch({
@@ -13,6 +20,13 @@ export function getDevices(filter){
   }
 }
 
+/**
+ * Action creator for device removal
+ * 
+ * @export
+ * @param {String} id 
+ * @returns 
+ */
 export function removeDevice(id){
   return dispatch => {
     dispatch({
@@ -26,6 +40,13 @@ export function removeDevice(id){
   }
 }
 
+/**
+ * Action creator for device update
+ * 
+ * @export
+ * @param {Object} body 
+ * @returns 
+ */
 export function saveDevice(body){
   return dispatch => 
     dispatch({
@@ -39,6 +60,14 @@ export function saveDevice(body){
   
 }
 
+/**
+ * Action creator for sending device command
+ * 
+ * @export
+ * @param {String} deviceId 
+ * @param {Object} body 
+ * @returns 
+ */
 export function sendCommand(deviceId, body){
   return dispatch =>
     dispatch({
@@ -51,6 +80,14 @@ export function sendCommand(deviceId, body){
     });
 }
 
+/**
+ * Action creator for sending device notification
+ * 
+ * @export
+ * @param {String} deviceId 
+ * @param {Object} body 
+ * @returns 
+ */
 export function sendNotification(deviceId, body){
   return dispatch => 
     dispatch({
@@ -63,6 +100,14 @@ export function sendNotification(deviceId, body){
     })
 }
 
+/**
+ * Action creator for refreshing device command
+ * 
+ * @export
+ * @param {String} deviceId 
+ * @param {String} commandId 
+ * @returns 
+ */
 export function refreshCommand(deviceId, commandId){
   return dispatch =>
     dispatch({

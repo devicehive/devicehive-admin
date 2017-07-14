@@ -1,8 +1,20 @@
+import { Col, Grid, Row } from 'react-flexbox-grid';
+import { DatePicker, Dialog, Divider, FlatButton, TimePicker } from 'material-ui';
 import React, { Component } from 'react';
-import { Grid, Row, Col } from 'react-flexbox-grid';
-import { Dialog, DatePicker, TimePicker, FlatButton, Divider } from 'material-ui';
 
+/**
+ * Date/time filter dialog
+ * 
+ * @export
+ * @class TimeFilter
+ * @extends {Component}
+ */
 export default class TimeFilter extends Component {
+  /**
+   * Creates an instance of TimeFilter.
+   * @param {Object} props 
+   * @memberof TimeFilter
+   */
   constructor(props){
     super(props);
     this.state = {
@@ -17,18 +29,40 @@ export default class TimeFilter extends Component {
     };
   }
 
+  /**
+   * Date change handler
+   * 
+   * @param {String} type 
+   * @param {Object} event 
+   * @param {String} newDate 
+   * @memberof TimeFilter
+   */
   changeDate(type, event, newDate){
     const stateCopy = Object.assign({}, this.state);
     stateCopy[type].date = newDate;
     this.setState(stateCopy);
   }
 
+  /**
+   * Time change handler
+   * 
+   * @param {String} type 
+   * @param {Object} event 
+   * @param {String} newTime 
+   * @memberof TimeFilter
+   */
   changeTime(type, event, newTime){
     const stateCopy = Object.assign({}, this.state);
     stateCopy[type].time = newTime;
     this.setState(stateCopy);
   }
 
+  /**
+   * Date/time cleaning handler
+   * 
+   * @param {String} type 
+   * @memberof TimeFilter
+   */
   clearDateTime(type){
     this.setState({
       [type] : {
@@ -38,10 +72,21 @@ export default class TimeFilter extends Component {
     })
   }
 
+  /**
+   * Timet period handler
+   * 
+   * @memberof TimeFilter
+   */
   setTimePeriod(){
     this.props.saveTime(this.state.from, this.state.to);
   }
 
+  /**
+   * Render
+   * 
+   * @returns 
+   * @memberof TimeFilter
+   */
   render(){
     const dateTimeActions = [
       <FlatButton

@@ -1,20 +1,32 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { Grid, Col, Row } from 'react-flexbox-grid';
-import actions from '../../actions';
-import Navbar from '../common/Navbar';
+import { Col, Grid, Row } from 'react-flexbox-grid';
 import {
-  TextField,
+  MenuItem,
   RaisedButton,
   SelectField,
-  MenuItem,
-  Subheader
+  Subheader,
+  TextField
 } from 'material-ui';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import React, { Component } from 'react';
+import Navbar from '../common/Navbar';
 import NetworksTable from '../tables/NetworksTable';
+import actions from '../../actions';
 
+/**
+ * user page
+ * 
+ * @export
+ * @class User
+ * @extends {Component}
+ */
 export class User extends Component {
+  /**
+   * Creates an instance of User.
+   * @param {Object} props 
+   * @memberof User
+   */
   constructor(props){
     super(props);
     this.state = {
@@ -25,6 +37,11 @@ export class User extends Component {
     };
   }
 
+  /**
+   * Lifecycle
+   * 
+   * @memberof User
+   */
   componentWillMount(){
     this.props.actions.users.getUser(this.props.match.params.id)
     .then(() => {
@@ -35,18 +52,34 @@ export class User extends Component {
     this.props.actions.networks.getNetworks();
   }
 
+  /**
+   * Lifecycle
+   * 
+   * @param {Object} nextProps 
+   * @memberof User
+   */
   componentWillReceiveProps(nextProps){
     this.setState({
       user : Object.assign({}, nextProps.users.get(`user`).toJS())
     })
   }
 
+  /**
+   * Form edit handler
+   * 
+   * @memberof User
+   */
   setEdit(){
     this.setState({
       edit : true
     })
   }
 
+  /**
+   * Form submit handler
+   * 
+   * @memberof User
+   */
   submit(){
     if (this.state.error === ``){
       this.props.actions.users.saveUser(this.state.user);
@@ -56,6 +89,11 @@ export class User extends Component {
     }
   }
 
+  /**
+   * Cancel form editing handler
+   * 
+   * @memberof User
+   */
   cancel(){
     this.setState({
       user : Object.assign({}, this.props.users.get(`user`).toJS()),
@@ -64,14 +102,31 @@ export class User extends Component {
     })
   }
 
+  /**
+   * Unassign network handler
+   * 
+   * @param {Number} networkId 
+   * @memberof User
+   */
   unassignNetwork(networkId){
     this.props.actions.users.unassignNetwork(this.state.user.id, networkId);
   }
 
+  /**
+   * Assign network handler
+   * 
+   * @memberof User
+   */
   assignNetwork(){
     this.props.actions.users.assignNetwork(this.state.user.id, this.state.network);
   }
 
+  /**
+   * Render
+   * 
+   * @returns 
+   * @memberof User
+   */
   render(){
     return (
       <div>
@@ -270,6 +325,13 @@ export class User extends Component {
   }
 }
 
+/**
+ * Redux store mapper
+ * 
+ * @export
+ * @param {Object} state 
+ * @returns 
+ */
 export function mapStateToProps(state){
   return {
     auth : state.auth,
@@ -278,6 +340,13 @@ export function mapStateToProps(state){
   }
 }
 
+/**
+ * Redux action mapper
+ * 
+ * @export
+ * @param {any} dispatch 
+ * @returns 
+ */
 export function mapDispatchToProps(dispatch){
   return {
     actions : {

@@ -1,15 +1,27 @@
-import React, { Component } from 'react';
+import { Col, Grid, Row } from 'react-flexbox-grid';
+import { RaisedButton } from 'material-ui';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import actions from '../../actions';
+import React, { Component } from 'react';
 import Navbar from '../common/Navbar';
-import { Grid, Row, Col } from 'react-flexbox-grid';
 import Pagination from 'material-ui-pagination';
-import UsersTable from '../tables/UsersTable';
-import { RaisedButton } from 'material-ui';
 import UserForm from '../forms/UserForm';
+import UsersTable from '../tables/UsersTable';
+import actions from '../../actions';
 
+/**
+ * Users page
+ * 
+ * @export
+ * @class Users
+ * @extends {Component}
+ */
 export class Users extends Component {
+  /**
+   * Creates an instance of Users.
+   * @param {Object} props 
+   * @memberof Users
+   */
   constructor(props){
     super(props);
     this.state = {
@@ -18,16 +30,32 @@ export class Users extends Component {
     };
   }
 
+  /**
+   * Lifecycle
+   * 
+   * @memberof Users
+   */
   componentWillMount(){
     this.props.actions.users.getUsers();
   }
 
+  /**
+   * Toggle form handler
+   * 
+   * @memberof Users
+   */
   toggleForm(){
     this.setState({
       showUserForm : !this.state.showUserForm
     })
   }
 
+  /**
+   * Submit form handler
+   * 
+   * @param {Object} body 
+   * @memberof Users
+   */
   submit(body){
     this.setState({
       showUserForm : false
@@ -36,6 +64,12 @@ export class Users extends Component {
     .then(this.props.actions.users.getUsers);
   }
 
+  /**
+   * Render
+   * 
+   * @returns 
+   * @memberof Users
+   */
   render(){
     return (
       <div>
@@ -87,6 +121,13 @@ export class Users extends Component {
   }
 }
 
+/**
+ * Redux store mapper
+ * 
+ * @export
+ * @param {Object} state 
+ * @returns 
+ */
 export function mapStateToProps(state){
   return {
     auth : state.auth,
@@ -94,6 +135,13 @@ export function mapStateToProps(state){
   };
 }
 
+/**
+ * Redux action mapper
+ * 
+ * @export
+ * @param {Function} dispatch 
+ * @returns 
+ */
 export function mapDispatchToProps(dispatch){
   return {
     actions : {

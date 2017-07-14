@@ -1,6 +1,6 @@
+import { Map } from 'immutable';
 import constants from '../constants';
 import jwtDecode from 'jwt-decode';
-import { Map } from 'immutable';
 
 const initialState = Map({
   refreshPromise : null,
@@ -13,8 +13,16 @@ const initialState = Map({
   })
 });
 
+/**
+ * Auth reducer
+ * 
+ * @export
+ * @param {Object} [state=initialState] 
+ * @param {Object} action 
+ * @returns 
+ */
 export default function auth(state = initialState, action){
-  switch(action.type){
+  switch (action.type){
   case constants.auth.LOGIN_REQUEST:
     return state
       .set(`isRefreshing`, false)

@@ -1,24 +1,23 @@
-import React from 'react';
-import { render } from 'react-dom';
-import configureStore from './store/configureStore';
-import { Provider } from 'react-redux';
-import { HashRouter, Route } from 'react-router-dom';
-import ProtectedRoute from './components/common/ProtectedRoute';
-import registerServiceWorker from './registerServiceWorker';
 import './index.css';
-
-import Login from './components/pages/Login';
-import Users from './components/pages/Users';
-import User from './components/pages/User';
-import Networks from './components/pages/Networks';
-import Network from './components/pages/Network';
-import Devices from './components/pages/Devices';
+import { HashRouter, Route } from 'react-router-dom';
 import Device from './components/pages/Device';
+import Devices from './components/pages/Devices';
 import JWT from './components/pages/JWT';
-import Profile from './components/pages/Profile';
-
+import Login from './components/pages/Login';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Network from './components/pages/Network';
+import Networks from './components/pages/Networks';
+import Profile from './components/pages/Profile';
+import ProtectedRoute from './components/common/ProtectedRoute';
+import { Provider } from 'react-redux';
+import React from 'react';
+import User from './components/pages/User';
+import Users from './components/pages/Users';
+import configureStore from './store/configureStore';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import registerServiceWorker from './registerServiceWorker';
+import { render } from 'react-dom';
+
 injectTapEventPlugin();
 
 const store = configureStore();

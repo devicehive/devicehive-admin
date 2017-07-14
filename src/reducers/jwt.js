@@ -1,6 +1,6 @@
+import { Map } from 'immutable';
 import constants from '../constants';
 import jwtDecode from 'jwt-decode';
-import { Map } from 'immutable';
 
 const initialState = Map({
   access : Map({
@@ -13,8 +13,16 @@ const initialState = Map({
   })
 });
 
+/**
+ * JWT reducer
+ * 
+ * @export
+ * @param {Object} [state=initialState] 
+ * @param {Object} action 
+ * @returns 
+ */
 export default function jwt(state = initialState, action){
-  switch(action.type){
+  switch (action.type){
   case constants.jwt.CREATE_TOKEN_REQUEST:
     return state
       .setIn([`access`, `token`], ``)

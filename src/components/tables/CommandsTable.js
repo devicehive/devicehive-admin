@@ -1,25 +1,50 @@
-import React, { Component } from 'react';
 import {
+  FontIcon,
   Table,
   TableBody,
   TableHeader,
   TableHeaderColumn,
   TableRow,
-  TableRowColumn,
-  FontIcon
+  TableRowColumn
 } from 'material-ui';
+import React, { Component } from 'react';
 import moment from 'moment';
 
+/**
+ * Commands table component
+ * 
+ * @export
+ * @class CommandsTable
+ * @extends {Component}
+ */
 export class CommandsTable extends Component {
 
+  /**
+   * Refresh command handler
+   * 
+   * @param {String} commandId 
+   * @memberof CommandsTable
+   */
   refreshCommand(commandId){
     this.props.refreshCommand(commandId);
   }
 
+  /**
+   * Copy command handler
+   * 
+   * @param {Object} command 
+   * @memberof CommandsTable
+   */
   copyCommand(command){
     this.props.copyCommand(command);
   }
 
+  /**
+   * Render
+   * 
+   * @returns 
+   * @memberof CommandsTable
+   */
   render(){
     return (
       <Table

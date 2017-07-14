@@ -1,20 +1,32 @@
-import React, { Component } from 'react';
 import {
   Card, 
   CardActions, 
   CardHeader, 
   CardText,
-  FlatButton,
   Divider,
+  FlatButton,
   FontIcon,
-  TextField,
+  MenuItem,
   SelectField,
-  MenuItem
+  TextField
 } from 'material-ui';
+import React, { Component } from 'react';
 import { Col } from 'react-flexbox-grid';
 import randomstring from 'randomstring';
 
+/**
+ * Form for Device creation
+ * 
+ * @export
+ * @class DeviceForm
+ * @extends {Component}
+ */
 export default class DeviceForm extends Component {
+  /**
+   * Creates an instance of DeviceForm.
+   * @param {Object} props 
+   * @memberof DeviceForm
+   */
   constructor(props){
     super(props);
     this.state = {
@@ -27,6 +39,11 @@ export default class DeviceForm extends Component {
     };
   }
 
+  /**
+   * Form submit handler
+   * 
+   * @memberof DeviceForm
+   */
   submit(){
     if (this.state.error === ``){
       this.props.submit({
@@ -39,6 +56,12 @@ export default class DeviceForm extends Component {
     }
   }
 
+  /**
+   * Render
+   * 
+   * @returns 
+   * @memberof DeviceForm
+   */
   render(){
     return (
       <Card>

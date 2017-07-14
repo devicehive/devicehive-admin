@@ -1,15 +1,27 @@
-import React, { Component } from 'react';
+import { Col, Grid, Row } from 'react-flexbox-grid';
+import { FontIcon, Paper, RaisedButton, TextField } from 'material-ui';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import actions from '../../actions';
-import Navbar from '../common/Navbar';
-import { Paper, RaisedButton, TextField, FontIcon } from 'material-ui';
-import { Grid, Col, Row } from 'react-flexbox-grid';
-import moment from 'moment';
-import TokenDialog from '../TokenDialog';
+import React, { Component } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
+import Navbar from '../common/Navbar';
+import TokenDialog from '../TokenDialog';
+import actions from '../../actions';
+import moment from 'moment';
 
+/**
+ * JWT page
+ * 
+ * @export
+ * @class JWT
+ * @extends {Component}
+ */
 export class JWT extends Component {
+  /**
+   * Creates an instance of JWT.
+   * @param {Object} props 
+   * @memberof JWT
+   */
   constructor(props){
     super(props);
     this.state = {
@@ -17,23 +29,45 @@ export class JWT extends Component {
     };
   }
 
+  /**
+   * Token dialog open handler
+   * 
+   * @memberof JWT
+   */
   openTokenDialog(){
     this.setState({
       openTokenDialog : true
     })
   }
 
+  /**
+   * Token dialog close handler
+   * 
+   * @memberof JWT
+   */
   closeTokenDialog(){
     this.setState({
       openTokenDialog : false
     })
   }
 
+  /**
+   * Tocken creation handler
+   * 
+   * @param {any} timestamp 
+   * @memberof JWT
+   */
   createToken(timestamp){
     this.props.actions.jwt.createToken(this.props.auth.getIn([`tokens`, `jwtToken`]), timestamp);
     this.closeTokenDialog();
   }
 
+  /**
+   * Render
+   * 
+   * @returns 
+   * @memberof JWT
+   */
   render(){
     return (
       <div>
@@ -122,6 +156,13 @@ export class JWT extends Component {
   }
 }
 
+/**
+ * Redux store mapper
+ * 
+ * @export
+ * @param {Object} state 
+ * @returns 
+ */
 export function mapStateToProps(state){
   return {
     auth : state.auth,
@@ -129,6 +170,13 @@ export function mapStateToProps(state){
   };
 }
 
+/**
+ * Redux action mapper
+ * 
+ * @export
+ * @param {Function} dispatch 
+ * @returns 
+ */
 export function mapDispatchToProps(dispatch){
   return {
     actions : {

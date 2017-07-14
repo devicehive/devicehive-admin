@@ -1,5 +1,5 @@
-import constants from '../constants';
 import { List, Map } from 'immutable';
+import constants from '../constants';
 import moment from 'moment';
 
 const initialState = Map({
@@ -11,8 +11,16 @@ const initialState = Map({
   notificationsPoll : List([])
 });
 
+/**
+ * Polling reducer
+ * 
+ * @export
+ * @param {Object} [state=initialState] 
+ * @param {Object} action 
+ * @returns 
+ */
 export default function polling(state = initialState, action){
-  switch(action.type){
+  switch (action.type){
   case constants.polling.UPDATE_TAB:
     return state
       .set(`tab`, action.payload)

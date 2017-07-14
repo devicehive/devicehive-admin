@@ -1,19 +1,31 @@
-import React, { Component } from 'react';
 import {
   Card,
   CardActions,
   CardHeader,
   CardText,
-  FontIcon,
   Divider,
-  TextField,
   FlatButton,
+  FontIcon,
+  MenuItem,
   SelectField,
-  MenuItem
+  TextField
 } from 'material-ui';
+import React, { Component } from 'react';
 import { Col } from 'react-flexbox-grid';
 
+/**
+ * Form for User updates
+ * 
+ * @export
+ * @class UserForm
+ * @extends {Component}
+ */
 export default class UserForm extends Component {
+  /**
+   * Creates an instance of UserForm.
+   * @param {Object} props 
+   * @memberof UserForm
+   */
   constructor(props){
     super(props);
     this.state = {
@@ -27,6 +39,11 @@ export default class UserForm extends Component {
     };
   }
 
+  /**
+   * Form submit handler
+   * 
+   * @memberof UserForm
+   */
   submit(){
     if (this.state.error === `` && this.state.password === this.state.passwordConfirmation){
       this.props.submit({
@@ -39,6 +56,12 @@ export default class UserForm extends Component {
     }
   }
 
+  /**
+   * Render
+   * 
+   * @returns 
+   * @memberof UserForm
+   */
   render(){
     return (
       <Card>
