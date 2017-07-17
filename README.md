@@ -46,8 +46,8 @@ In the project directory, you can run:
 ### `REACT_APP_SERVER_URL= REACT_APP_POLL_HISTORY_SIZE= npm start`
 
 Runs the app in the development mode.<br>
-REACT_APP_SERVER_URL - url to server
-REACT_APP_POLL_HISTORY_SIZE - size of poll history to fetch by default
+REACT_APP_SERVER_URL - url to servers' REST API<br>
+REACT_APP_POLL_HISTORY_SIZE - size of poll history to fetch by default<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br>
@@ -57,7 +57,7 @@ You will also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.<br>
 
-### `EACT_APP_SERVER_URL= REACT_APP_POLL_HISTORY_SIZE= npm run build`
+### `REACT_APP_SERVER_URL= REACT_APP_POLL_HISTORY_SIZE= npm run build`
 
 Builds the app for production to the `build` folder.<br>
 It correctly bundles React in production mode and optimizes the build for the best performance.
@@ -69,5 +69,5 @@ Your app is ready to be deployed!
 
 For proper building run:
 
-1. `docker build --no-cache --build-arg REACT_APP_SERVER_URL= --build-arg REACT_APP_POLL_HISTORY_SIZE= -t devicehive/admin .`
-2. `docker run -p <outport>:5000 -d devicehive/admin`
+1. `docker build --no-cache -t devicehive/admin .`
+2. `docker run -p <outport>:5000 -e REACT_APP_SERVER_URL= -e REACT_APP_POLL_HISTORY_SIZE= -d devicehive/admin`
