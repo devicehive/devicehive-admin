@@ -41,6 +41,18 @@ export class Login extends Component {
   }
 
   /**
+   * On login form enter handler
+   * 
+   * @param {any} event 
+   * @memberof Login
+   */
+  onKeyPress(event){
+    if (event.key === `Enter`){
+      this.login();
+    }
+  }
+
+  /**
    * Submit login
    * 
    * @memberof Login
@@ -71,6 +83,7 @@ export class Login extends Component {
                 fullWidth={true}
                 floatingLabelText="Login"
                 onChange={this.setLoginInfo.bind(this)}
+                onKeyPress={this.onKeyPress.bind(this)}
                 autoComplete="off"
               />
             </Col>
@@ -83,6 +96,7 @@ export class Login extends Component {
                 fullWidth={true}
                 floatingLabelText="Password"
                 onChange={this.setLoginInfo.bind(this)}
+                onKeyPress={this.onKeyPress.bind(this)}
                 autoComplete="off"
               />
             </Col>

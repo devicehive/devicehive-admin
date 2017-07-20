@@ -24,6 +24,11 @@ export default class TokenDialog extends Component {
     };
   }
 
+  /**
+   * Lifecycle function
+   * 
+   * @memberof TokenDialog
+   */
   componentWillMount(){
     this.setState({
       date : new Date(moment().add(30, `minutes`).format(`YYYY-MM-DD[T]HH:mm:ss.SSS`)),
