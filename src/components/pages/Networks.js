@@ -103,7 +103,13 @@ export class Networks extends Component {
               </Col>
             </Row>
           }
-          <Row>
+          <Row
+            style={{
+              position : `absolute`,
+              bottom : 10,
+              width : `98%`
+            }}
+          >
             <Col md={2} lg={2} mdOffset={5} lgOffset={5}>
               <Pagination
                 total={Math.ceil(this.props.networks.get(`networksList`).size / 10)}
