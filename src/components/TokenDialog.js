@@ -24,6 +24,13 @@ export default class TokenDialog extends Component {
     };
   }
 
+  componentWillMount(){
+    this.setState({
+      date : new Date(moment().add(30, `minutes`).format(`YYYY-MM-DD[T]HH:mm:ss.SSS`)),
+      time : new Date(moment().add(30, `minutes`).format(`YYYY-MM-DD[T]HH:mm:ss.SSS`))
+    })
+  }
+
   /**
    * Token creation handler
    * 
@@ -46,6 +53,7 @@ export default class TokenDialog extends Component {
    * @memberof TokenDialog
    */
   changeDateTime(key, event, value){
+    console.log(JSON.stringify(value));
     this.setState({
       [key] : value
     })
