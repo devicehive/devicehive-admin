@@ -35,6 +35,25 @@ export default class NetworksTable extends Component {
    * @memberof NetworksTable
    */
   render(){
+    const width = {
+      name : 10,
+      description : 10
+    };
+    if (this.props.networks.length){
+      this.props.networks.forEach(network => {
+        if (width.name < network.name.length){
+          width.name = network.name.length;
+        }
+        if (network.description && width.description < network.description.length){
+          width.description = network.description.length;
+        }
+      })
+      const widthFull = width.name + width.description;
+      for (const key of Object.keys(width)){
+        width[key] = `${(width[key] / widthFull) * 90}%`;
+      }
+    }
+
     return (
       <Table
         fixedFooter={false}
@@ -51,8 +70,20 @@ export default class NetworksTable extends Component {
           displaySelectAll={false}
         >
           <TableRow>
-            <TableHeaderColumn>Network</TableHeaderColumn>
-            <TableHeaderColumn>Description</TableHeaderColumn>
+            <TableHeaderColumn
+              style={{
+                width : `${width.name}`
+              }}
+            >
+              Network
+            </TableHeaderColumn>
+            <TableHeaderColumn
+              style={{
+                width : `${width.description}`
+              }}
+            >
+              Description
+            </TableHeaderColumn>
             {this.props.userRole === `admin` && 
             <TableHeaderColumn>Actions</TableHeaderColumn>
             }
@@ -65,7 +96,12 @@ export default class NetworksTable extends Component {
             <TableRow
               key={index}
             > 
-              <TableRowColumn key={`${index}-network`}>
+              <TableRowColumn 
+                key={`${index}-network`}
+                style={{
+                  width : `${width.name}`
+                }}
+              >
                 <Link
                   to={{
                     pathname : `/network/${network.id}`,
@@ -77,7 +113,13 @@ export default class NetworksTable extends Component {
                   {network.name}
                 </Link>
               </TableRowColumn>
-              <TableRowColumn key={`${index}-description`}>{network.description}</TableRowColumn>
+              <TableRowColumn 
+                key={`${index}-description`}
+                style={{
+                  width : `${width.description}`
+                }}
+              >
+                {network.description}</TableRowColumn>
               {this.props.userRole === `admin` &&
                 <TableRowColumn><FontIcon className="material-icons" onTouchTap={this.remove.bind(this, network.id)} style={{ cursor : `pointer` }}>close</FontIcon></TableRowColumn>
               }
