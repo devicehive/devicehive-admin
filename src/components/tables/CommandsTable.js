@@ -49,7 +49,7 @@ export class CommandsTable extends Component {
     const width = {
       name : 10,
       time : 15,
-      parameters : 10,
+      parameters : 15,
       status : 10,
       result : 10
     };

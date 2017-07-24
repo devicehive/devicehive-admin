@@ -39,7 +39,7 @@ export default class NetworksTable extends Component {
       name : 10,
       description : 10
     };
-    if (this.props.networks.length){
+    if (this.props.networks && this.props.networks.length){
       this.props.networks.forEach(network => {
         if (width.name < network.name.length){
           width.name = network.name.length;

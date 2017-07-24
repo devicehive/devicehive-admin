@@ -30,7 +30,9 @@ export class User extends Component {
   constructor(props){
     super(props);
     this.state = {
-      user : {},
+      user : {
+        networks : []
+      },
       edit : false,
       error : ``,
       network : null
