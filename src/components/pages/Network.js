@@ -72,12 +72,12 @@ export class Network extends Component {
   render(){
     return (
       <div>
-        <Navbar locationPath={this.props.location.pathname.substring(0, this.props.location.pathname.lastIndexOf(`/`))} showDrawer={false} authenticated={true} logout={this.props.actions.logout} userRole={this.props.auth.get(`role`)}/>
+        <Navbar locationPath={this.props.location.pathname.substring(0, this.props.location.pathname.lastIndexOf(`/`))} showDrawer={true} authenticated={true} logout={this.props.actions.logout} userRole={this.props.auth.get(`role`)}/>
         <Grid fluid>
           <Row>
               <Col md={8} lg={8} mdOffset={2} lgOffset={2}>
                 <Row>
-                  <Col md={6} lg={6}>
+                  <Col md={8} lg={6}>
                     <TextField
                       id="networkName"
                       type="text"
@@ -99,7 +99,7 @@ export class Network extends Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Col md={6} lg={6}>
+                  <Col md={8} lg={6}>
                     <TextField
                       id="networkDescription"
                       type="text"
@@ -120,7 +120,7 @@ export class Network extends Component {
                     />
                   </Col>
                 </Row>
-                {this.state.edit ?
+                {this.state.edit &&
                   <Row>
                     <Col md={6} lg={6}>
                       <Row>
@@ -131,20 +131,6 @@ export class Network extends Component {
                           <RaisedButton label="Cancel" fullWidth={true} onTouchTap={this.cancel.bind(this)}/>
                         </Col>
                       </Row>
-                    </Col>
-                  </Row>
-                  :
-                  <Row>
-                    <Col md={6} lg={6}>
-                      <Row>
-                        <Col md={6} lg={6}>
-                          <RaisedButton
-                            label="Back"
-                            fullWidth={true}
-                            onTouchTap={() => this.props.history.goBack()}
-                          />
-                        </Col>
-                      </Row> 
                     </Col>
                   </Row>
                 }

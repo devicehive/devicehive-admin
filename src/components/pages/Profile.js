@@ -97,7 +97,7 @@ export class Profile extends Component {
           <Row>
             <Col md={8} lg={8} mdOffset={2} lgOffset={2}>
               <Row>
-                <Col md={6} lg={6}>
+                <Col md={8} lg={6}>
                   <TextField
                     id="userLogin"
                     type="text"
@@ -119,7 +119,7 @@ export class Profile extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col md={6} lg={6}>
+                <Col md={8} lg={6}>
                   <TextField
                     id="userPassword"
                     type="password"
@@ -141,7 +141,7 @@ export class Profile extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col md={6} lg={6}>
+                <Col md={8} lg={6}>
                   <TextField
                     id="userOldPassword"
                     type="password"
@@ -163,7 +163,7 @@ export class Profile extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col md={6} lg={6}>
+                <Col md={8} lg={6}>
                   <SelectField
                     floatingLabelText="Role"
                     fullWidth={true}
@@ -192,7 +192,7 @@ export class Profile extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col md={6} lg={6}>
+                <Col md={8} lg={6}>
                   <SelectField
                     floatingLabelText="Status"
                     fullWidth={true}
@@ -225,7 +225,7 @@ export class Profile extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col md={6} lg={6}>
+                <Col md={8} lg={6}>
                   <TextField
                     id="userData"
                     type="text"
